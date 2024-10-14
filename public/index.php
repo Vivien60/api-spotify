@@ -3,7 +3,7 @@ session_start();
 ?>
 <htmL lang="fr">
 <head><title>Benveniidoo !</title></head>
-<body>test
+<body>
 <?php
     if(empty($_SESSION['token'])) {
         ?><a href="coupleWithSpotify">Associer le site à votre compte Spotify</a><br/><?php
