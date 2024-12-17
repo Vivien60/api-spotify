@@ -2,10 +2,10 @@
 require_once "../src/autoload.php";
 
 use GuzzleHttp\Exception\RequestException;
+use infrastructure\dal\api\Spotify\client\ClientForToken as Client;
+use infrastructure\dal\api\Spotify\request\TokenFromCode;
 use model\Credentials\BusinessLogic\CredentialsRepo;
 use model\Credentials\Persistence\OneFileAdapter;
-use persistenceclient\api\Spotify\client\ClientForToken as Client;
-use persistenceclient\api\Spotify\request\TokenFromCode;
 
 session_start();
 require_once "../src/utils/trace.php";

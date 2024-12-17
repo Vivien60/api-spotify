@@ -1,0 +1,28 @@
+<?php
+
+namespace infrastructure\service;
+
+use infrastructure\dal\api\ClientAbstract;
+use infrastructure\dal\api\RequestAbstract;
+use infrastructure\entity\TokenItem;
+use infrastructure\repository\auth\FileAuthUserRepo;
+use model\User\User;
+
+class RequestToApiByUser
+{
+    public readonly ?TokenItem $token;
+
+    public function __construct(
+        public readonly FileAuthUserRepo $repository,
+        public readonly ClientAbstract $requestFactory,
+        public readonly ?User $user,
+    )
+    {
+        $this->token = $this->repository->fetchByUser($this->user);
+    }
+
+    public function createRequest($requestName) : RequestAbstract
+    {
+        return $this->requestFactory->{$requestName}($this->token);
+    }
+}

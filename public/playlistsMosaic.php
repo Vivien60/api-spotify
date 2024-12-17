@@ -5,9 +5,9 @@ require_once "../vendor/autoload.php";
 require_once "../config/apiConfig.php";
 
 use GuzzleHttp\Exception\RequestException;
+use infrastructure\repository\playlist\PlaylistRepo;
 use model\Credentials\BusinessLogic\CredentialsRepo;
 use model\Credentials\Persistence\OneFileAdapter;
-use model\Playlist\BusinessLogic\PlaylistRepo;
 use model\Playlist\Persistense\SpotifyAdapter;
 use view\layouts\ConnectedLayout;
 use view\templates\components\Mosaic;
