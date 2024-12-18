@@ -18,7 +18,7 @@ class PlaylistRepo
 
     public function retrievePlaylist(PlaylistItem $playlist) : void
     {
-        $this->storage->fetch($playlist);
+        //$this->storage->fetch($playlist);
     }
 
     /**

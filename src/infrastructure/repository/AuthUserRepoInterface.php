@@ -7,7 +7,7 @@ use model\User\User;
 
 interface AuthUserRepoInterface
 {
-    public function fetchByUser(?User $user = null): ?TokenItem;
+    public function fetchById(?User $user = null): ?TokenItem;
     public function add(mixed $token): void;
     public function delete(mixed $token): void;
 }

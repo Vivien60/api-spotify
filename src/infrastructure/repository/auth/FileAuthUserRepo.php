@@ -29,7 +29,7 @@ class FileAuthUserRepo implements AuthUserRepoInterface
         $_SESSION['token'] = null;
     }
 
-    public function fetchByUser(?User $user = null) : ?TokenItem
+    public function fetchById(?User $user = null) : ?TokenItem
     {
         $token = json_decode(file_get_contents($this->tokenStorageFile)?:'');
         return !empty($token) && is_object($token)? new TokenItem($token->allData, $token->accessToken, $token->refreshToken):null;

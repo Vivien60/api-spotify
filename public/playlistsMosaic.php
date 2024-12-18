@@ -5,21 +5,18 @@ require_once "../vendor/autoload.php";
 require_once "../config/apiConfig.php";
 
 use GuzzleHttp\Exception\RequestException;
-use infrastructure\repository\playlist\PlaylistRepo;
-use model\Credentials\BusinessLogic\CredentialsRepo;
-use model\Credentials\Persistence\OneFileAdapter;
-use model\Playlist\Persistense\SpotifyAdapter;
+use infrastructure\repository\auth\FileAuthUserRepo;
+use infrastructure\repository\playlist\PlaylistApiRepo;
+use model\User\User;
 use view\layouts\ConnectedLayout;
 use view\templates\components\Mosaic;
 use view\templates\Playlists;
 
 session_start();
 try {
-    $tokenRepo = new CredentialsRepo(new OneFileAdapter(TOKEN_STORAGE_FILE));
-    $token = $tokenRepo->ofCurrentUser();
-    $playlistsAtSpotify = new PlaylistRepo(new SpotifyAdapter($token));
-    $tokenRepo->saveIfRefreshed($token);
-    $myPlaylists = $playlistsAtSpotify->getAllMyPlaylists();
+    $me = new User();
+    $repo = new PlaylistApiRepo();
+    $myPlaylists = $repo->findMyPlaylists($me);
     $view = new Playlists(new ConnectedLayout(), new Mosaic($myPlaylists));
     echo $view->render();
 } catch (RequestException $e) {

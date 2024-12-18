@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head><title>aaa</title></head>
-<body>aaa
 <?php
-class Toto
-{
-    public $nom = 'glos minet';
-    public $opp = '';
+class RecursiveObject {
+    public $self;
+
+    public function __construct() {
+        $this->self = $this;
+    }
 }
 
-function test_obj(Toto $obj)
-{
-    $obj->opp = 'titi';
-}
+$obj1 = new RecursiveObject();
+$obj2 = new RecursiveObject();
 
-$grosMinet = new Toto();
-test_obj($grosMinet);
-var_dump($grosMinet);
-?>
-</body>
-</html>
+try {
+    $result = $obj1 == $obj2;
+} catch (Error $e) {
+    echo "Une erreur a été capturée : " . $e->getMessage();
+}

@@ -18,7 +18,7 @@ class RequestToApiByUser
         public readonly ?User $user,
     )
     {
-        $this->token = $this->repository->fetchByUser($this->user);
+        $this->token = $this->repository->fetchById($this->user);
     }
 
     public function createRequest($requestName) : RequestAbstract

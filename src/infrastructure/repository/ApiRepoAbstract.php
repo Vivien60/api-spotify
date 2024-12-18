@@ -8,6 +8,7 @@ use infrastructure\dal\api\contracts\RequestFactoryInterface;
 use infrastructure\dal\api\RequestAbstract;
 use infrastructure\dal\api\utils\RequestFactoryProvider;
 use infrastructure\entity\TokenItem;
+use model\Playlist\Playlist as PlaylistItem;
 use model\User\User;
 use Psr\Http\Message\ResponseInterface;
 
@@ -50,7 +51,7 @@ abstract class ApiRepoAbstract
 
     protected function authUser(User $user): ?TokenItem
     {
-        return $this->authUserRepo->fetchByUser($user);
+        return $this->authUserRepo->fetchById($user);
     }
 
     abstract public function requestType(): string;
