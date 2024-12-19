@@ -5,18 +5,15 @@ require_once "../vendor/autoload.php";
 require_once "../config/apiConfig.php";
 
 use GuzzleHttp\Exception\RequestException;
-use infrastructure\repository\auth\FileAuthUserRepo;
-use infrastructure\repository\playlist\PlaylistApiRepo;
-use model\User\User;
+use service\GetUserPlaylists;
 use view\layouts\ConnectedLayout;
 use view\templates\components\Mosaic;
 use view\templates\Playlists;
 
 session_start();
 try {
-    $me = new User();
-    $repo = new PlaylistApiRepo();
-    $myPlaylists = $repo->findMyPlaylists($me);
+    $getPlaylists = new GetUserPlaylists();
+    $myPlaylists = $getPlaylists->forCurrentUser();
     $view = new Playlists(new ConnectedLayout(), new Mosaic($myPlaylists));
     echo $view->render();
 } catch (RequestException $e) {

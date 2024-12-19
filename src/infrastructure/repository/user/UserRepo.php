@@ -1,13 +1,11 @@
 <?php
 
-namespace infrastructure\repository\playlist;
+namespace infrastructure\repository\user;
 
-use infrastructure\repository\ApiRepoAbstract;
-use model\Playlist\Playlist as PlaylistItem;
 use model\User\User;
 use Psr\Http\Message\ResponseInterface;
 
-class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
+class UserRepo
 {
     public function __construct()
     {
@@ -19,16 +17,15 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
         return 'playlist';
     }
 
-    public function findById(int $id): ?PlaylistItem
+    public function findById(int $id): ?User
     {
         //$this->requestFactory->playlistTracks()->fetch($playlist);
         return null;
     }
 
-    public function findMyPlaylists(User $user): ?array
+    public function findCurrentUser(): ?User
     {
-        $results = $this->queryWithUserAuth($user);
-        return $this->parsePlaylists($results);
+        return new User();
     }
 
     protected function parsePlaylists(ResponseInterface $results): array
@@ -44,13 +41,8 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
      * @param array{id: string, url: string, image: string, name: string} $playlist
      * @return PlaylistItem
      */
-    protected function hydrateItem(array $playlist): PlaylistItem
+    protected function hydrateItem(array $playlist): User
     {
-        $item = new PlaylistItem();
-        $item->id = $playlist['id'];
-        $item->title = $playlist['name'];
-        $item->url = $playlist['url'];
-        $item->imageUrl = $playlist['image'];
-        return $item;
+
     }
 }
