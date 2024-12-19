@@ -2,8 +2,10 @@
 
 namespace infrastructure\dal\api;
 
+use infrastructure\dal\api\contracts\ClientForTokenInterface;
 use infrastructure\dal\api\LyricsOvh\client\Client as LyricsOvhClient;
 use infrastructure\dal\api\Spotify\client\Client as SpotifyClient;
+use infrastructure\dal\api\Spotify\client\ClientForToken;
 use model\Song\Song;
 
 class ClientFactory
@@ -23,5 +25,10 @@ class ClientFactory
             default:
                 return self::default();
         }
+    }
+
+    public static function forTokenFromType(string $type) : ClientForTokenInterface
+    {
+        return new ClientForToken();
     }
 }
