@@ -2,14 +2,14 @@
 
 namespace infrastructure\repository\user;
 
+use contracts\UserRepoInterface;
 use model\User\User;
 use Psr\Http\Message\ResponseInterface;
 
-class UserRepo
+class UserRepo implements UserRepoInterface
 {
     public function __construct()
     {
-        parent::__construct();
     }
 
     public function requestType(): string
