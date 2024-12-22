@@ -5,7 +5,16 @@ function autoload1247575(string $nomClasse) : void {
         "src",
         str_replace("\\", DIRECTORY_SEPARATOR, "$nomClasse.php"),
     ]);
+    if(file_exists($class)) {
+        include $class;
+        return;
+    }
+    $class = implode(DIRECTORY_SEPARATOR, [
+        "..",
+        str_replace("\\", DIRECTORY_SEPARATOR, "$nomClasse.php"),
+    ]);
     include $class;
+
 }
 
 spl_autoload_register('autoload1247575');

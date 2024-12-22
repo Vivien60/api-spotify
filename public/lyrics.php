@@ -1,6 +1,6 @@
 <?php
 require_once "../src/autoload.php";
-require_once "../config/apiConfig.php";
+require_once "../config/Config.php";
 
 use exception\NotFoundE;
 use GuzzleHttp\Exception\RequestException;

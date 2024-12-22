@@ -1,7 +1,9 @@
 <?php
-
+declare(strict_types=1);
 namespace infrastructure\repository\playlist;
 
+use contracts\PlaylistRepoInterface;
+use infrastructure\musicService\MusicServiceFactory;
 use infrastructure\repository\ApiRepoAbstract;
 use model\Playlist\Playlist as PlaylistItem;
 use model\User\User;
@@ -9,14 +11,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 {
+
     public function __construct()
     {
-        parent::__construct();
-    }
-
-    public function requestType(): string
-    {
-        return 'playlist';
+        parent::__construct(MusicServiceFactory::playlistService());
     }
 
     public function findById(int $id): ?PlaylistItem
@@ -27,8 +25,8 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 
     public function findMyPlaylists(User $user): ?array
     {
-        $results = $this->queryWithUserAuth($user);
-        return $this->parsePlaylists($results);
+        $result = $this->musicService->getUserPlaylists($user);
+        return $this->parsePlaylists($result);
     }
 
     protected function parsePlaylists(ResponseInterface $results): array

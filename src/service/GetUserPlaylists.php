@@ -2,8 +2,7 @@
 
 namespace service;
 
-use infrastructure\repository\playlist\PlaylistRepoFactory;
-use infrastructure\repository\user\UserRepo;
+use config\Config;
 use model\Playlist\Playlist;
 use model\User\User;
 
@@ -20,9 +19,9 @@ class GetUserPlaylists
         return $this->playlistsByUser($me);
     }
 
-    private function getCurrentUser(): User
+    private function getCurrentUser(): ?User
     {
-        $userRepo = new UserRepo();
+        $userRepo = Config::getInstance()->userRepo;
         return $userRepo->findCurrentUser();
     }
 
@@ -32,7 +31,7 @@ class GetUserPlaylists
      */
     public function playlistsByUser(User $user):array
     {
-        $repo = PlaylistRepoFactory::createDefault();
+        $repo = Config::getInstance()->playlistRepo;
         return $repo->findMyPlaylists($user);
     }
 }

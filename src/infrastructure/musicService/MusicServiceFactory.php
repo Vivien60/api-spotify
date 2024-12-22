@@ -2,17 +2,29 @@
 
 namespace infrastructure\musicService;
 
-use infrastructure\musicService\Spotify\MusicServiceInterface;
+use infrastructure\dal\api\Spotify\client\Client;
+use infrastructure\dal\api\Spotify\client\ClientForToken;
+use infrastructure\dal\api\Spotify\request\RequestFactory;
 use infrastructure\musicService\Spotify\Spotify;
+use infrastructure\repository\contracts\MusicServiceInterface;
 
 class MusicServiceFactory
 {
     public static function default():MusicServiceInterface
     {
-        return new Spotify();
+        return new Spotify(
+            new Client(),
+            new RequestFactory(),
+            new ClientForToken(),
+        );
     }
-    public static function defaultWithOAuth():MusicServiceInterface&OAuthInterface
+
+    public static function playlistService():MusicServiceInterface
     {
-        return new Spotify();
+        return new Spotify(
+            new Client(),
+            new RequestFactory(),
+            new ClientForToken(),
+        );
     }
 }

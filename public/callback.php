@@ -9,7 +9,7 @@ use model\Credentials\Persistence\OneFileAdapter;
 
 session_start();
 require_once "../src/utils/trace.php";
-require_once "../config/apiConfig.php";
+require_once "../config/Config.php";
 
 /**
  * @TODO Vivien : gestion de l'affichage de l'erreur

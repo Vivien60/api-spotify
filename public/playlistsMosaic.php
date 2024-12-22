@@ -2,7 +2,7 @@
 require_once "../src/autoload.php";
 require_once "../vendor/autoload.php";
 
-require_once "../config/apiConfig.php";
+require_once "../config/Config.php";
 
 use GuzzleHttp\Exception\RequestException;
 use service\GetUserPlaylists;
