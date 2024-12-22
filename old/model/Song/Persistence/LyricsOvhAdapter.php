@@ -5,7 +5,7 @@ namespace model\Song\Persistence;
 use exception\NotFoundE;
 use GuzzleHttp\Exception\GuzzleException;
 use infrastructure\dal\api\ClientAbstract;
-use infrastructure\dal\api\contracts\EndpointRequestInterface;
+use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
 use infrastructure\dal\api\LyricsOvh\client\Client;
 use infrastructure\dal\api\LyricsOvh\request\Lyrics;
 use model\Song\BusinessLogic\LyricsStorageInterface;

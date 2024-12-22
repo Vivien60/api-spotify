@@ -1,6 +1,6 @@
 <?php
 
-namespace infrastructure\repository\playlist;
+namespace contracts;
 
 use model\Playlist\Playlist as PlaylistItem;
 use model\User\User;

@@ -4,7 +4,7 @@ namespace model\Song\Persistence;
 
 use exception\NotFoundE;
 use infrastructure\dal\api\ClientAbstract;
-use infrastructure\dal\api\contracts\EndpointRequestInterface;
+use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
 use infrastructure\dal\api\Spotify\client\Client;
 use infrastructure\dal\api\Spotify\request\PlaylistTracks;
 use model\Credentials\BusinessLogic\TokenItem;

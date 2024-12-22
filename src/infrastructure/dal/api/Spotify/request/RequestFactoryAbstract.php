@@ -2,7 +2,7 @@
 
 namespace infrastructure\dal\api\Spotify\request;
 
-use infrastructure\dal\api\contracts\RequestFactoryInterface;
+use infrastructure\dal\api\contracts\internal\RequestFactoryInterface;
 use infrastructure\dal\api\RequestAbstract;
 
 abstract class RequestFactoryAbstract implements RequestFactoryInterface

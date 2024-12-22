@@ -2,7 +2,7 @@
 
 namespace infrastructure\dal\api\utils;
 
-use infrastructure\dal\api\contracts\RequestFactoryInterface;
+use infrastructure\dal\api\contracts\internal\RequestFactoryInterface;
 use infrastructure\dal\api\Spotify\request\RequestFactory as SpotifyRequestFactory;
 
 class RequestFactoryProvider

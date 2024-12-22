@@ -5,8 +5,8 @@ namespace infrastructure\dal\api;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
-use infrastructure\dal\api\contracts\EndpointRequestInterface;
-use infrastructure\dal\api\contracts\RequestFactoryInterface;
+use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
+use infrastructure\dal\api\contracts\internal\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 

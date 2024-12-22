@@ -2,8 +2,8 @@
 
 namespace infrastructure\dal\api;
 
-use infrastructure\dal\api\contracts\AuthTokenInterface;
-use infrastructure\dal\api\contracts\AuthTypeInterface;
+use infrastructure\dal\api\contracts\internal\AuthTokenInterface;
+use infrastructure\dal\api\contracts\internal\AuthTypeInterface;
 use infrastructure\entity\TokenItem;
 
 abstract class AuthTokenAbstract implements AuthTypeInterface, AuthTokenInterface, \Stringable

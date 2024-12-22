@@ -1,6 +1,6 @@
 <?php
 
-namespace infrastructure\dal\api\contracts;
+namespace infrastructure\dal\api\contracts\internal;
 
 interface WithBearerTokenInterface
 {

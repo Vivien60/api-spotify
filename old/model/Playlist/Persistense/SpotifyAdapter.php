@@ -3,7 +3,7 @@
 namespace model\Playlist\Persistense;
 
 use infrastructure\dal\api\ClientAbstract;
-use infrastructure\dal\api\contracts\EndpointRequestInterface;
+use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
 use infrastructure\dal\api\Spotify\client\Client;
 use infrastructure\dal\api\Spotify\request\Playlist;
 use infrastructure\repository\playlist\PlaylistStorageInterface;

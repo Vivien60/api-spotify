@@ -2,7 +2,7 @@
 
 namespace infrastructure\dal\api\Spotify\request;
 
-use infrastructure\dal\api\contracts\RequestFactoryInterface;
+use infrastructure\dal\api\contracts\internal\RequestFactoryInterface;
 use infrastructure\entity\TokenItem;
 
 class RequestFactory implements RequestFactoryInterface

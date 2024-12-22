@@ -2,10 +2,8 @@
 
 namespace infrastructure\dal\api\Spotify\utils;
 
-use infrastructure\dal\api\contracts\UrlForCodeAbstract;
+use infrastructure\dal\api\contracts\internal\UrlForCodeAbstract;
 use infrastructure\dal\api\Spotify\client\ClientForToken;
-use Random\RandomException;
-use Stringable;
 
 class UrlForCode extends UrlForCodeAbstract
 {

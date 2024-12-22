@@ -3,7 +3,7 @@
 namespace infrastructure\dal\api;
 
 use Exception;
-use infrastructure\dal\api\contracts\EndpointRequestInterface;
+use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
 use Throwable;
 
 abstract class RequestAbstract implements EndpointRequestInterface
