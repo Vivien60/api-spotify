@@ -8,5 +8,5 @@ use Psr\Http\Message\ResponseInterface;
 
 interface PlaylistServiceInterface extends MusicServiceInterface
 {
-    public function getUserPlaylists(User $user) : ResponseInterface;
+    public function fromUser(User $user) : ResponseInterface;
 }

@@ -32,6 +32,6 @@ class GetUserPlaylists
     public function playlistsByUser(User $user):array
     {
         $repo = Config::getInstance()->playlistRepo;
-        return $repo->findMyPlaylists($user);
+        return $repo->findByUser($user);
     }
 }

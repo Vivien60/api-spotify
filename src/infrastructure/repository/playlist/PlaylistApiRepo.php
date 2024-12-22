@@ -23,13 +23,13 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
         return null;
     }
 
-    public function findMyPlaylists(User $user): ?array
+    public function findByUser(User $user): ?array
     {
-        $result = $this->musicService->getUserPlaylists($user);
-        return $this->parsePlaylists($result);
+        $result = $this->musicService->fromUser($user);
+        return $this->parseQResponse($result);
     }
 
-    protected function parsePlaylists(ResponseInterface $results): array
+    protected function parseQResponse(ResponseInterface $results): array
     {
         $items = [];
         foreach ($results as $playlist) {

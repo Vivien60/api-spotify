@@ -8,6 +8,6 @@ use model\User\User;
 interface PlaylistRepoInterface
 {
     public function findById(int $id): ?PlaylistItem;
-    public function findMyPlaylists(User $user): ?array;
+    public function findByUser(User $user): ?array;
 
 }

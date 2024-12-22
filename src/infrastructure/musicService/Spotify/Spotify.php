@@ -28,7 +28,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         return new UrlForCode($this->clientOAuth, $config::CLIENT_ID, $config::REDIRECT_URI);
     }
 
-    public function getUserPlaylists(User $user):ResponseInterface
+    public function fromUser(User $user):ResponseInterface
     {
         $authRepo = Config::getInstance()->authUserRepo;
         $auth = $authRepo->fetchById($user);
