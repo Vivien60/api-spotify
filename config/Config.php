@@ -2,9 +2,14 @@
 namespace config;
 
 use contracts\PlaylistRepoInterface;
+use infrastructure\dal\api\Spotify\client\Client;
+use infrastructure\dal\api\Spotify\client\ClientForToken;
+use infrastructure\dal\api\Spotify\request\RequestFactory;
 use infrastructure\musicService\MusicServiceFactory;
+use infrastructure\musicService\Spotify\Spotify;
 use infrastructure\repository\auth\FileAuthUserRepo;
 use infrastructure\repository\AuthUserRepoInterface;
+use infrastructure\repository\contracts\MusicServiceInterface;
 use infrastructure\repository\playlist\PlaylistApiRepo;
 use infrastructure\repository\user\UserRepo;
 
@@ -48,6 +53,19 @@ class Config {
             !empty($this->authUserRepo)?:new FileAuthUserRepo();
         }
         set(AuthUserRepoInterface $value) {}
+    }
+
+    public MusicServiceInterface $musicService {
+        get {
+            (!empty($this->musicService)?:
+                new Spotify(
+                    new Client(),
+                    new RequestFactory(),
+                    new ClientForToken(),
+                )
+            );
+        }
+        set(MusicServiceInterface $value) {}
     }
 
     private function __construct() {

@@ -1,11 +1,12 @@
 <?php
 require_once "../src/autoload.php";
 require_once "../vendor/autoload.php";
-require_once "../config/Config.php";
 
+use config\Config;
 use infrastructure\musicService\MusicServiceFactory;
 
 session_start();
-$service = MusicServiceFactory::default();
+$config = Config::getInstance();
+$service = $config->musicService;
 $urlRedirect = $service->urlForCode();
 header('Location:'.$urlRedirect->url());
