@@ -2,7 +2,7 @@
 
 namespace infrastructure\dal\api\Spotify\client;
 
-use infrastructure\dal\api\contracts\internal\ClientForTokenInterface;
+use infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
 
 class ClientForToken extends Client implements ClientForTokenInterface
 {

@@ -7,7 +7,7 @@ use model\User\User;
 
 interface PlaylistRepoInterface
 {
-    public function findById(int $id): ?PlaylistItem;
+    public function findById(int|string $id): ?PlaylistItem;
     public function findByUser(User $user): ?array;
 
 }

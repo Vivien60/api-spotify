@@ -2,15 +2,14 @@
 namespace config;
 
 use contracts\PlaylistRepoInterface;
-use infrastructure\dal\api\Spotify\client\Client;
-use infrastructure\dal\api\Spotify\client\ClientForToken;
-use infrastructure\dal\api\Spotify\request\RequestFactory;
-use infrastructure\musicService\MusicServiceFactory;
-use infrastructure\musicService\Spotify\Spotify;
+use infrastructure\dal\api\LyricsOvh\client\Client;
+use infrastructure\dal\api\musicService\MusicServiceFactory;
 use infrastructure\repository\auth\FileAuthUserRepo;
 use infrastructure\repository\AuthUserRepoInterface;
 use infrastructure\repository\contracts\MusicServiceInterface;
+use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use infrastructure\repository\playlist\PlaylistApiRepo;
+use infrastructure\repository\song\contracts\SongServiceInterface;
 use infrastructure\repository\user\UserRepo;
 
 define('TOKEN_STORAGE_FILE', dirname(__FILE__,2).DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'token.json');
@@ -58,14 +57,28 @@ class Config {
     public MusicServiceInterface $musicService {
         get {
             (!empty($this->musicService)?:
-                new Spotify(
-                    new Client(),
-                    new RequestFactory(),
-                    new ClientForToken(),
-                )
+                MusicServiceFactory::spotify()
             );
         }
         set(MusicServiceInterface $value) {}
+    }
+
+    public PlaylistServiceInterface $playlistService {
+        get {
+            (!empty($this->playlistService)?:
+                MusicServiceFactory::spotify()
+            );
+        }
+        set(PlaylistServiceInterface $value) {}
+    }
+
+    public SongServiceInterface $songService {
+        get {
+            (!empty($this->songService)?:
+                new Client()
+            );
+        }
+        set(SongServiceInterface $value) {}
     }
 
     private function __construct() {

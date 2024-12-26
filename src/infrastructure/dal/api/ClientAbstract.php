@@ -6,7 +6,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
-use infrastructure\dal\api\contracts\internal\RequestFactoryInterface;
+use infrastructure\dal\api\musicService\contracts\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 

@@ -2,7 +2,7 @@
 
 namespace infrastructure\dal\api;
 
-use infrastructure\dal\api\contracts\internal\ClientForTokenInterface;
+use infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
 use infrastructure\dal\api\LyricsOvh\client\Client as LyricsOvhClient;
 use infrastructure\dal\api\Spotify\client\Client as SpotifyClient;
 use infrastructure\dal\api\Spotify\client\ClientForToken;

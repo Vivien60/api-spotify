@@ -2,22 +2,23 @@
 declare(strict_types=1);
 namespace infrastructure\repository\playlist;
 
+use config\Config;
 use contracts\PlaylistRepoInterface;
-use infrastructure\musicService\MusicServiceFactory;
 use infrastructure\repository\ApiRepoAbstract;
+use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use model\Playlist\Playlist as PlaylistItem;
 use model\User\User;
 use Psr\Http\Message\ResponseInterface;
 
 class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 {
-
-    public function __construct()
+    public function __construct(?PlaylistServiceInterface $service = null)
     {
-        parent::__construct(MusicServiceFactory::playlistService());
+        $this->musicService = $service?:Config::getInstance()->playlistService;
+        parent::__construct();
     }
 
-    public function findById(int $id): ?PlaylistItem
+    public function findById(int|string $id): ?PlaylistItem
     {
         //$this->requestFactory->playlistTracks()->fetch($playlist);
         return null;
@@ -25,19 +26,9 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 
     public function findByUser(User $user): ?array
     {
-        $result = $this->musicService->fromUser($user);
+        $result = $this->musicService->playlistFromUser($user);
         return $this->parseQResponse($result);
     }
-
-    protected function parseQResponse(ResponseInterface $results): array
-    {
-        $items = [];
-        foreach ($results as $playlist) {
-            $items[] = $this->hydrateItem($playlist);
-        }
-        return $items;
-    }
-
     /**
      * @param array{id: string, url: string, image: string, name: string} $playlist
      * @return PlaylistItem
