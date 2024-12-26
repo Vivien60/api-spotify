@@ -2,8 +2,8 @@
 
 namespace infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
-use infrastructure\dal\api\contracts\internal\WithBearerTokenInterface;
+use infrastructure\dal\api\musicService\contracts\EndpointRequestInterface;
+use infrastructure\dal\api\musicService\contracts\WithBearerTokenInterface;
 use infrastructure\dal\api\RequestAbstract;
 use infrastructure\entity\TokenItem;
 

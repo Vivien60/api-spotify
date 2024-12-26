@@ -2,7 +2,7 @@
 
 namespace infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\contracts\internal\WithRefreshTokenInterface;
+use infrastructure\dal\api\musicService\contracts\WithRefreshTokenInterface;
 use infrastructure\dal\api\RequestAbstract;
 
 abstract class RequestWithRefreshTokenAbstract extends RequestAbstract implements WithRefreshTokenInterface
