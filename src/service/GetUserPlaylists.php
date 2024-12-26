@@ -34,10 +34,10 @@ class GetUserPlaylists
         $repo = Config::getInstance()->playlistRepo;
         return $repo->findByUser($user);
     }
-    public function byPlaylistId(int|string $playlistId): Playlist
+    public function byPlaylistIdForCurrentUser(int|string $playlistId): Playlist
     {
         $me = $this->getCurrentUser();
         $repo = Config::getInstance()->playlistRepo;
-        return $repo->findById($playlistId);
+        return $repo->findById($playlistId, $me);
     }
 }

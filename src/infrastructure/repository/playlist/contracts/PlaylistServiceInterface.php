@@ -10,5 +10,5 @@ interface PlaylistServiceInterface extends MusicServiceInterface
 {
     public function playlistFromUser(User $user) : ResponseInterface;
 
-    public function songFromUserPlaylist(User $user, int|string $idPlaylist):ResponseInterface;
+    public function songsFromUserPlaylist(User $user, int|string $idPlaylist):ResponseInterface;
 }

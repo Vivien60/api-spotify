@@ -24,16 +24,8 @@ if (!empty($_GET['code']) && !empty($_GET['state']) /*&& $_GET['state'] == STATE
          *              Voir pour passer par un adapter, puisque Client fait appel à une infra externe.
          *              Ici on est dans un process de couplage avec un service externe, donc peut être OAuth.
          */
-        $client = new Client();
-        $tokenRequest = new TokenFromCode(CLIENT_ID, CLIENT_SECRET, htmlentities($_GET['code']), REDIRECT_URI);
-        $response = $client->sendRequest($tokenRequest);
-        $token = json_decode($response->getBody());
-        if($token?->access_token) {
-            $repo = new CredentialsRepo(new OneFileAdapter($storageFile));
-            $repo->saveNewOne($token);
-        } else {
-            throw new \exception\AuthError("There was an error while sending token request");
-        }
+        $service = \config\Config::getInstance()->playlistService;
+        $token = $service->tokenFromCode(htmlentities($_GET['code']));
     } catch (RequestException $e) {
         /**
          * @TODO Vivien :

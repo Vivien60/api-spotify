@@ -18,9 +18,9 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
         parent::__construct();
     }
 
-    public function findById(int|string $id): ?PlaylistItem
+    public function findById(int|string $id, User $user): ?PlaylistItem
     {
-        //$this->requestFactory->playlistTracks()->fetch($playlist);
+        $this->musicService->songsFromUserPlaylist($user, $id);
         return null;
     }
 

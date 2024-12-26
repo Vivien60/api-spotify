@@ -4,6 +4,7 @@ namespace config;
 use contracts\PlaylistRepoInterface;
 use infrastructure\dal\api\LyricsOvh\client\Client;
 use infrastructure\dal\api\musicService\MusicServiceFactory;
+use infrastructure\dal\api\musicService\OAuthInterface;
 use infrastructure\repository\auth\FileAuthUserRepo;
 use infrastructure\repository\AuthUserRepoInterface;
 use infrastructure\repository\contracts\MusicServiceInterface;
@@ -63,7 +64,7 @@ class Config {
         set(MusicServiceInterface $value) {}
     }
 
-    public PlaylistServiceInterface $playlistService {
+    public PlaylistServiceInterface&OAuthInterface $playlistService {
         get {
             (!empty($this->playlistService)?:
                 MusicServiceFactory::spotify()

@@ -4,6 +4,7 @@ namespace infrastructure\dal\api\Spotify\request;
 
 use infrastructure\dal\api\musicService\contracts\PlaylistRqFactoryInterface;
 use infrastructure\dal\api\RequestAbstract;
+use infrastructure\dal\api\utils\OAuth\SecretAuth;
 use infrastructure\entity\TokenItem;
 
 class RequestFactory implements PlaylistRqFactoryInterface
@@ -23,8 +24,8 @@ class RequestFactory implements PlaylistRqFactoryInterface
         return new RefreshToken($clientId, $clientSecret, $token);
     }
 
-    public function tokenFromCode(mixed $clientId, mixed $clientSecret, TokenItem $token) : TokenFromCode
+    public function tokenFromCode(SecretAuth $secret, string $redirectUri, string $code) : TokenFromCode
     {
-        return new TokenFromCode($clientId, $clientSecret, $token);
+        return new TokenFromCode($secret, $code, $redirectUri);
     }
 }
