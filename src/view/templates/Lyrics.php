@@ -2,7 +2,7 @@
 
 namespace view\templates;
 
-use model\Song\BusinessLogic\SongItem;
+use model\Song\Song as SongItem;
 use view\layouts\Layout;
 
 class Lyrics extends Template
