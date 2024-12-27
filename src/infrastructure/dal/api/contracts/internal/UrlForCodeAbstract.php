@@ -3,13 +3,14 @@
 namespace infrastructure\dal\api\contracts\internal;
 
 use infrastructure\dal\api\ClientAbstract;
+use infrastructure\dal\api\Spotify\client\ClientForToken;
 use Random\RandomException;
 
 class UrlForCodeAbstract
 {
     public const string SCOPE = '';
 
-    public function __construct(private ClientAbstract $client, private mixed $clientId, private string $redirectUri)
+    public function __construct(private ClientForToken $client, private mixed $clientId, private string $redirectUri)
     {
     }
     /**
@@ -39,7 +40,7 @@ class UrlForCodeAbstract
         return array(
             'response_type' => 'code',
             'client_id' => $this->clientId,
-            'scope' => self::SCOPE,
+            'scope' => $this->client->getScope(),
             'redirect_uri' => $this->redirectUri,
             'state' => bin2hex(random_bytes(5)), //@TODO Vivien : mettre le state en session
         );
@@ -51,6 +52,6 @@ class UrlForCodeAbstract
      */
     public function buildCodeRequestUrl(array $query): string
     {
-        return $this->client::BASE_URI . 'authorize?' . http_build_query($query);
+        return $this->client->getBaseUri() . 'authorize?' . http_build_query($query);
     }
 }

@@ -6,11 +6,11 @@ use config\Config;
 use exception\AuthError;
 use infrastructure\dal\api\ClientAbstract;
 use infrastructure\dal\api\contracts\internal\UrlForCodeAbstract;
-use infrastructure\dal\api\Spotify\utils\UrlForCode;
 use infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
 use infrastructure\dal\api\musicService\contracts\PlaylistRqFactoryInterface;
 use infrastructure\dal\api\musicService\OAuthInterface;
 use infrastructure\dal\api\utils\OAuth\SecretAuth;
+use infrastructure\dal\api\utils\OAuth\UrlForCode;
 use infrastructure\entity\TokenItem;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use model\User\User;
@@ -20,7 +20,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
 {
     private Config $config {
         get {
-            $this->config ??= new SecretAuth($this->config::CLIENT_ID, $this->config::CLIENT_SECRET);
+            $this->config ??= Config::getInstance();
             return $this->config;
         }
     }

@@ -7,7 +7,7 @@ use infrastructure\dal\api\RequestAbstract;
 use infrastructure\dal\api\utils\OAuth\SecretAuth;
 use infrastructure\entity\TokenItem;
 
-interface RequestFactoryInterface
+interface OAuthRqFactoryInterface
 {
     public function refreshToken(mixed $clientId, mixed $clientSecret, TokenItem $token) : RequestAbstract;
 

@@ -2,12 +2,12 @@
 
 namespace infrastructure\dal\api\Spotify\request;
 
+use infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
 use infrastructure\dal\api\musicService\contracts\PlaylistRqFactoryInterface;
-use infrastructure\dal\api\RequestAbstract;
 use infrastructure\dal\api\utils\OAuth\SecretAuth;
 use infrastructure\entity\TokenItem;
 
-class RequestFactory implements PlaylistRqFactoryInterface
+class RequestFactory implements PlaylistRqFactoryInterface, OauthRqFactoryInterface
 {
     public function playlistsMine(TokenItem $token) : Playlist
     {

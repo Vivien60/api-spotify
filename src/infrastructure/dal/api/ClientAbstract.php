@@ -6,14 +6,14 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
-use infrastructure\dal\api\musicService\contracts\RequestFactoryInterface;
+use infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 abstract class ClientAbstract
 {
     protected GuzzleClient $client;
-    protected RequestFactoryInterface $requestFactory;
+    protected OAuthRqFactoryInterface $requestFactory;
 
     public const string BASE_URI = 'TO_DEFINE';
 
@@ -36,6 +36,8 @@ abstract class ClientAbstract
      * @return string[]
      */
     abstract protected function getConfig(): array;
+
+    abstract public function getBaseUri(): string;
 
     /**
      * @throws Throwable

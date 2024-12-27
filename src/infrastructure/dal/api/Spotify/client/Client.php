@@ -23,7 +23,7 @@ class Client extends ClientAbstract
     protected function getConfig(): array
 
     {
-        return ['base_uri' => static::BASE_URI];
+        return ['base_uri' => $this->getBaseUri()];
     }
 
     /**
@@ -38,5 +38,10 @@ class Client extends ClientAbstract
     protected function isNotFoundError(RequestException $e): bool
     {
         return $e->getCode() == 404;
+    }
+
+    public function getBaseUri(): string
+    {
+        return static::BASE_URI;
     }
 }
