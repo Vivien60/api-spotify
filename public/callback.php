@@ -19,11 +19,6 @@ $storageFile = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SE
 
 if (!empty($_GET['code']) && !empty($_GET['state']) /*&& $_GET['state'] == STATE_OK*/) {
     try {
-        /**
-         * @TODO Vivien :
-         *              Voir pour passer par un adapter, puisque Client fait appel à une infra externe.
-         *              Ici on est dans un process de couplage avec un service externe, donc peut être OAuth.
-         */
         $service = \config\Config::getInstance()->playlistService;
         $token = $service->tokenFromCode(htmlentities($_GET['code']));
     } catch (RequestException $e) {
