@@ -15,12 +15,11 @@ require_once "../config/Config.php";
  * @TODO Vivien : gestion de l'affichage de l'erreur
  */
 const STATE_OK = 1;
-$storageFile = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'token.json';
 
 if (!empty($_GET['code']) && !empty($_GET['state']) /*&& $_GET['state'] == STATE_OK*/) {
     try {
-        $service = \config\Config::getInstance()->playlistService;
-        $token = $service->tokenFromCode(htmlentities($_GET['code']));
+        $service = new Service\GetUserToken();
+        $token = $service->createUserToken(htmlentities($_GET['code']));
     } catch (RequestException $e) {
         /**
          * @TODO Vivien :
