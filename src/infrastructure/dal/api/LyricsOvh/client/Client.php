@@ -5,6 +5,7 @@ namespace infrastructure\dal\api\LyricsOvh\client;
 use Exception;
 use GuzzleHttp\Exception\RequestException;
 use infrastructure\dal\api\ClientAbstract;
+use Throwable;
 
 class Client extends ClientAbstract
 {
@@ -22,7 +23,12 @@ class Client extends ClientAbstract
      */
     protected function getConfig(): array
     {
-        return ['base_uri' => static::BASE_URI];
+        return ['base_uri' => $this->getBaseUri()];
+    }
+
+    public function getBaseUri(): string
+    {
+        return static::BASE_URI;
     }
 
     /**
@@ -37,7 +43,7 @@ class Client extends ClientAbstract
      * @param RequestException $e
      * @return bool
      */
-    protected function isAuthError(RequestException $e): bool
+    protected function isAuthError(Throwable $e): bool
     {
         return false;
     }
@@ -46,7 +52,7 @@ class Client extends ClientAbstract
      * @param RequestException|Exception $e
      * @return bool
      */
-    protected function isNotFoundError(RequestException|Exception $e): bool
+    protected function isNotFoundError(Throwable $e): bool
     {
         return $e->getCode() == 404;
     }

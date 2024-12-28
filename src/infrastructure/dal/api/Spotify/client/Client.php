@@ -5,6 +5,7 @@ namespace infrastructure\dal\api\Spotify\client;
 use GuzzleHttp\Exception\RequestException;
 use infrastructure\dal\api\ClientAbstract;
 use infrastructure\dal\api\Spotify\request\RequestFactory;
+use Throwable;
 
 class Client extends ClientAbstract
 {
@@ -30,12 +31,12 @@ class Client extends ClientAbstract
      * @param RequestException $e
      * @return bool
      */
-    protected function isAuthError(RequestException $e): bool
+    protected function isAuthError(Throwable $e): bool
     {
         return $e->getCode() == 401;
     }
 
-    protected function isNotFoundError(RequestException $e): bool
+    protected function isNotFoundError(Throwable $e): bool
     {
         return $e->getCode() == 404;
     }
