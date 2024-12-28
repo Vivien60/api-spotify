@@ -2,7 +2,9 @@
 
 namespace infrastructure\dal\api\contracts\internal;
 
-interface WithBearerTokenInterface
+use infrastructure\dal\api\utils\OAuth\BearerToken;
+
+interface WithBearerTokenInterface extends WithTokenInterface
 {
-    public function getBearerToken() : string;
+    public BearerToken $bearerToken { get; }
 }

@@ -2,12 +2,17 @@
 
 namespace infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\musicService\contracts\WithRefreshTokenInterface;
+use infrastructure\dal\api\contracts\internal\WithRefreshTokenInterface;
 use infrastructure\dal\api\RequestAbstract;
+use infrastructure\entity\TokenItem;
 
 abstract class RequestWithRefreshTokenAbstract extends RequestAbstract implements WithRefreshTokenInterface
 {
-    public function __construct(public RefreshToken $token)
+    public RefreshToken $refreshToken {
+        get => $this->refreshToken??= RefreshToken::fromTokenItem($this->token);
+    }
+
+    public function __construct(readonly TokenItem $token)
     {
         parent::__construct();
     }

@@ -2,20 +2,21 @@
 
 namespace infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\musicService\contracts\EndpointRequestInterface;
-use infrastructure\dal\api\musicService\contracts\WithBearerTokenInterface;
+use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
+use infrastructure\dal\api\contracts\internal\WithBearerTokenInterface;
 use infrastructure\dal\api\RequestAbstract;
 use infrastructure\entity\TokenItem;
 
 abstract class RequestWithBearerTokenAbstract extends RequestAbstract implements WithBearerTokenInterface, EndpointRequestInterface
 {
-    protected BearerToken $token;
+    public BearerToken $bearerToken {
+        get => $this->bearerToken??= BearerToken::fromTokenItem($this->token);
+    }
 
-    public function __construct(TokenItem $token)
+    public function __construct(readonly TokenItem $token)
     {
-        $this->token = BearerToken::fromTokenItem($token);
         $this->headers = [
-            'Authorization' => 'Bearer ' . $this->getBearerToken(),
+            'Authorization' => 'Bearer ' . $this->bearerToken,
         ];
         parent::__construct();
     }
@@ -28,8 +29,4 @@ abstract class RequestWithBearerTokenAbstract extends RequestAbstract implements
         return $this->headers;
     }
 
-    public function getBearerToken(): string
-    {
-        return $this->token;
-    }
 }

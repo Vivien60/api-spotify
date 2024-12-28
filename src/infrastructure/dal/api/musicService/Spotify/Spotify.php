@@ -5,16 +5,21 @@ namespace infrastructure\dal\api\musicService\Spotify;
 use config\Config;
 use exception\AuthError;
 use infrastructure\dal\api\ClientAbstract;
+use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
 use infrastructure\dal\api\contracts\internal\UrlForCodeAbstract;
+use infrastructure\dal\api\contracts\internal\WithBearerTokenInterface;
 use infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
+use infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
 use infrastructure\dal\api\musicService\contracts\PlaylistRqFactoryInterface;
 use infrastructure\dal\api\musicService\OAuthInterface;
+use infrastructure\dal\api\utils\OAuth\BearerToken;
 use infrastructure\dal\api\utils\OAuth\SecretAuth;
 use infrastructure\dal\api\utils\OAuth\UrlForCode;
 use infrastructure\entity\TokenItem;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use model\User\User;
 use Psr\Http\Message\ResponseInterface;
+use Throwable;
 
 class Spotify implements PlaylistServiceInterface, OAuthInterface
 {
@@ -33,7 +38,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
 
     public function __construct(
         private ClientAbstract $client,
-        private PlaylistRqFactoryInterface $requestFactory,
+        private PlaylistRqFactoryInterface & OAuthRqFactoryInterface $requestFactory,
         private ClientForTokenInterface $clientOAuth,
     )
     {
@@ -50,7 +55,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         $auth = $this->getUserAuth($user);
         $request = $this->requestFactory->playlistsMine($auth);
 
-        return  $this->client->sendRequest($request);
+        return $this->handleRequest($request);
     }
 
     public function songsFromUserPlaylist(User $user, int|string $idPlaylist):ResponseInterface
@@ -58,11 +63,46 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         $auth = $this->getUserAuth($user);
         $request = $this->requestFactory->playlistTracks($auth, $idPlaylist);
 
-        return  $this->client->sendRequest($request);
+        return $this->handleRequest($request);
+    }
+
+    protected function getUserAuth(User $user): ?\infrastructure\entity\TokenItem
+    {
+        return $this->config->authUserRepo->fetchById($user);
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
+     */
+    protected function handleRequest(EndpointRequestInterface $request): ResponseInterface
+    {
+        try {
+            return $this->client->sendRequest($request);
+        } catch(AuthError $e) {
+            if(is_a($request, WithBearerTokenInterface::class)) {
+                $this->refreshToken($request->token);
+                return $this->client->sendRequest($request);
+            } else {
+                throw $e;
+            }
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    protected function refreshToken($token): ResponseInterface
+    {
+        $request = $this->requestFactory->refreshToken(
+            $this->config::CLIENT_ID,
+            $this->config::CLIENT_SECRET,
+            $token
+        );
+        return $this->client->sendRequest($request);
+    }
+
+    /**
+     * @throws Throwable
      * @throws AuthError
      */
     public function tokenFromCode(string $code): TokenItem
@@ -71,23 +111,10 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         $response = $this->clientOAuth->sendRequest($request);
         $token = json_decode($response->getBody());
         if($token?->access_token) {
-            /*
-                TODO Vivien :
-                    il est implicite ici qu'un seul token est sauvé, car on ne passe pas l'utilisateur associé la méthode add, ce n'est pas correct.
-                    Récupérer l'utilisateur courant (puisque le code est renvoyé par le service de musique en appelant une url de notre appli
-                    via son navigateur)
-            */
-            $tokenItem = new TokenItem($token, $token->access_token, $token->refresh_token, true);
-            $this->config->authUserRepo->add($tokenItem);
-            return $tokenItem;
+            return new TokenItem($token, $token->access_token, $token->refresh_token, true);
         } else {
             throw new \exception\AuthError("There was an error while sending token request");
         }
-    }
-
-    protected function getUserAuth(User $user): ?\infrastructure\entity\TokenItem
-    {
-        return $this->config->authUserRepo->fetchById($user);
     }
 
 }

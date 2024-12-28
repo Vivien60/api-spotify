@@ -16,7 +16,7 @@ class FileAuthUserRepo implements AuthUserRepoInterface
         $this->tokenStorageFile = $tokenStorageFile;
     }
 
-    public function add(mixed $token): void
+    public function add(mixed $token, ?User $user = null): void
     {
         $tokenItem = new TokenItem($token, $token->access_token, $token->refresh_token);
         file_put_contents($this->tokenStorageFile, json_encode($tokenItem));

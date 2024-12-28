@@ -2,11 +2,11 @@
 
 namespace infrastructure\dal\api\musicService;
 
-use infrastructure\dal\api\LyricsOvh\client\Client as LyricsOvhCli;
 use infrastructure\dal\api\musicService\LyricsOvh\LyricsOvh;
+use infrastructure\dal\api\LyricsOvh\client\Client as LyricsOvhCli;
+use infrastructure\dal\api\LyricsOvh\request\RequestFactory as LyricsOvhRequests;
 use infrastructure\dal\api\Spotify\client\Client as SpotifyCli;
 use infrastructure\dal\api\Spotify\client\ClientForToken;
-use infrastructure\dal\api\LyricsOvh\request\RequestFactory as LyricsOvhRequests;
 use infrastructure\dal\api\Spotify\request\RequestFactory as SpotifyRequests;
 use infrastructure\dal\api\musicService\Spotify\Spotify;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
