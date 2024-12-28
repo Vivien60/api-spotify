@@ -37,39 +37,25 @@ class Config {
 
     private static $instance;
     public UserRepo $userRepo {
-        get {
-            !empty($this->userRepo)?:new UserRepo();
-        }
+        get =>  $this->userRepo??=new UserRepo();
         set(UserRepo $value) {}
     }
     public PlaylistRepoInterface $playlistRepo {
-        get {
-            !empty($this->playlistRepo)?:new PlaylistApiRepo();
-        }
+        get =>  $this->playlistRepo??=new PlaylistApiRepo();
         set(PlaylistRepoInterface $value) {}
     }
     public AuthUserRepoInterface $authUserRepo {
-        get {
-            !empty($this->authUserRepo)?:new FileAuthUserRepo();
-        }
+        get =>  $this->authUserRepo??= new FileAuthUserRepo(self::TOKEN_STORAGE_FILE);
         set(AuthUserRepoInterface $value) {}
     }
 
     public MusicServiceInterface $musicService {
-        get {
-            (!empty($this->musicService)?:
-                MusicServiceFactory::spotify()
-            );
-        }
+        get =>  $this->musicService??=MusicServiceFactory::spotify();
         set(MusicServiceInterface $value) {}
     }
 
     public PlaylistServiceInterface&OAuthInterface $playlistService {
-        get {
-            (!empty($this->playlistService)?:
-                MusicServiceFactory::spotify()
-            );
-        }
+        get => $this->playlistService??=MusicServiceFactory::spotify();
         set(PlaylistServiceInterface $value) {}
     }
 
