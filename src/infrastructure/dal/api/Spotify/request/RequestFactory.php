@@ -21,7 +21,7 @@ class RequestFactory implements PlaylistRqFactoryInterface, OauthRqFactoryInterf
 
     public function refreshToken(mixed $clientId, mixed $clientSecret, TokenItem $token) : RefreshToken
     {
-        return new RefreshToken($clientId, $clientSecret, $token);
+        return new RefreshToken(new SecretAuth($clientId, $clientSecret) , $token);
     }
 
     public function tokenFromCode(SecretAuth $secret, string $redirectUri, string $code) : TokenFromCode
