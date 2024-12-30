@@ -1,15 +1,11 @@
 <?php
 require_once "../src/autoload.php";
+require_once "../src/utils/trace.php";
 
 use GuzzleHttp\Exception\RequestException;
-use infrastructure\dal\api\Spotify\client\ClientForToken as Client;
-use infrastructure\dal\api\Spotify\request\TokenFromCode;
-use model\Credentials\BusinessLogic\CredentialsRepo;
-use model\Credentials\Persistence\OneFileAdapter;
+use service\GetUserToken;
 
 session_start();
-require_once "../src/utils/trace.php";
-require_once "../config/Config.php";
 
 /**
  * @TODO Vivien : gestion de l'affichage de l'erreur
@@ -18,7 +14,7 @@ const STATE_OK = 1;
 
 if (!empty($_GET['code']) && !empty($_GET['state']) /*&& $_GET['state'] == STATE_OK*/) {
     try {
-        $service = new Service\GetUserToken();
+        $service = new GetUserToken();
         $token = $service->createUserToken(htmlentities($_GET['code']));
     } catch (RequestException $e) {
         /**

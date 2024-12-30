@@ -12,7 +12,10 @@ class GetUserToken
     {
         $me = $this->getCurrentUser();
         $service = Config::getInstance()->playlistService;
+        trace(get_class($service));
+        trace("aaaa");
         $token = $service->tokenFromCode(htmlentities($_GET['code']));
+        trace("bbb");
         Config::getInstance()->authUserRepo->add($token, $me);
         return $token;
     }

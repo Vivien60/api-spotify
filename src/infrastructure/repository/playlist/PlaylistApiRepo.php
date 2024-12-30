@@ -29,6 +29,7 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
         $result = $this->musicService->playlistFromUser($user);
         return $this->parseQResponse($result);
     }
+
     /**
      * @param array{id: string, url: string, image: string, name: string} $playlist
      * @return PlaylistItem

@@ -8,6 +8,6 @@ use model\User\User;
 interface AuthUserRepoInterface
 {
     public function fetchById(?User $user = null): ?TokenItem;
-    public function add(mixed $token, ?User $user = null): void;
-    public function delete(mixed $token): void;
+    public function add(TokenItem $token, ?User $user = null): void;
+    public function delete(TokenItem $token): void;
 }

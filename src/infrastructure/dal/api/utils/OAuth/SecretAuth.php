@@ -2,7 +2,7 @@
 
 namespace infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\musicService\contracts\AuthTypeInterface;
+use infrastructure\dal\api\contracts\internal\AuthTypeInterface;
 
 class SecretAuth implements AuthTypeInterface
 {

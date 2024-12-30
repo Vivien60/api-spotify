@@ -7,11 +7,12 @@ use service\GetUserPlaylists;
 use view\layouts\ConnectedLayout;
 use view\templates\components\Mosaic;
 use view\templates\Playlists;
-
+error_reporting(E_ALL);
 session_start();
 try {
     $getPlaylists = new GetUserPlaylists();
     $myPlaylists = $getPlaylists->forCurrentUser();
+    var_dump($myPlaylists);
     $view = new Playlists(new ConnectedLayout(), new Mosaic($myPlaylists));
     echo $view->render();
 } catch (RequestException $e) {

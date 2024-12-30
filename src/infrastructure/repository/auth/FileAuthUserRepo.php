@@ -16,14 +16,13 @@ class FileAuthUserRepo implements AuthUserRepoInterface
         $this->tokenStorageFile = $tokenStorageFile;
     }
 
-    public function add(mixed $token, ?User $user = null): void
+    public function add(TokenItem $token, ?User $user = null): void
     {
-        $tokenItem = new TokenItem($token, $token->access_token, $token->refresh_token);
-        file_put_contents($this->tokenStorageFile, json_encode($tokenItem));
+        file_put_contents($this->tokenStorageFile, json_encode($token));
         $_SESSION['token'] = json_encode($token);
     }
 
-    public function delete(mixed $token): void
+    public function delete(TokenItem $token): void
     {
         file_put_contents($this->tokenStorageFile, '');
         $_SESSION['token'] = null;

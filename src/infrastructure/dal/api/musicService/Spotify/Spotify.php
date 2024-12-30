@@ -31,7 +31,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
     }
     private SecretAuth $appAuth {
         get {
-            $this->appAuth ??= new SecretAuth($this->config::CLIENT_ID, $this->config::CLIENT_SECRET);
+            $this->appAuth ??= new SecretAuth($this->config::$CLIENT_ID, $this->config::$CLIENT_SECRET);
             return $this->appAuth;
         }
     }
@@ -47,7 +47,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
     public function urlForCode(): UrlForCodeAbstract
     {
         $config = $this->config;
-        return new UrlForCode($this->clientOAuth, $config::CLIENT_ID, $config::REDIRECT_URI);
+        return new UrlForCode($this->clientOAuth, $config::$CLIENT_ID, $config::$REDIRECT_URI);
     }
 
     public function playlistFromUser(User $user):ResponseInterface
@@ -94,8 +94,8 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
     protected function refreshToken($token): ResponseInterface
     {
         $request = $this->requestFactory->refreshToken(
-            $this->config::CLIENT_ID,
-            $this->config::CLIENT_SECRET,
+            $this->config::$CLIENT_ID,
+            $this->config::$CLIENT_SECRET,
             $token
         );
         return $this->client->sendRequest($request);
@@ -107,7 +107,8 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
      */
     public function tokenFromCode(string $code): TokenItem
     {
-        $request = $this->requestFactory->tokenFromCode($this->appAuth, $this->config::REDIRECT_URI, $code);
+        trace('tokenFromCode');
+        $request = $this->requestFactory->tokenFromCode($this->appAuth, $this->config::$REDIRECT_URI, $code);
         $response = $this->clientOAuth->sendRequest($request);
         $token = json_decode($response->getBody());
         if($token?->access_token) {

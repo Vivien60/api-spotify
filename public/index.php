@@ -1,5 +1,7 @@
 <?php
+require_once "../src/autoload.php";
 session_start();
+var_dump($_SESSION);
 ?>
 <htmL lang="fr">
 <head><title>Benveniidoo !</title></head>

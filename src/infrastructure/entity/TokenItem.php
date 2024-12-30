@@ -9,16 +9,11 @@ class TokenItem implements JsonSerializable
 {
     public string $refreshToken;
     public string $accessToken;
-    public stdClass $allData;
+    public Object $allData;
     public bool $refreshed = false;
 
 
-    /**
-     * @param string $refreshToken
-     * @param string $accessToken
-     * @param stdClass $allData
-     */
-    public function __construct(stdClass $allData, string $accessToken, string $refreshToken, bool $refreshed = false)
+    public function __construct(Object $allData, string $accessToken, string $refreshToken, bool $refreshed = false)
     {
         $this->refreshToken = $refreshToken;
         $this->accessToken = $accessToken;
