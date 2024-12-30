@@ -10,14 +10,14 @@ class Playlist
 
     public string $title = '';
     public string $url = '';
-    public string $imageUrl = '';
+    public ?string $imageUrl = '';
 
     /**
      * @var Song[]
      */
     public array $songs = [];
 
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
         return $this->imageUrl;
     }

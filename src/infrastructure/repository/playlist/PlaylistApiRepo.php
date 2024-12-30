@@ -8,7 +8,6 @@ use infrastructure\repository\ApiRepoAbstract;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use model\Playlist\Playlist as PlaylistItem;
 use model\User\User;
-use Psr\Http\Message\ResponseInterface;
 
 class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 {
