@@ -29,16 +29,12 @@ abstract class ApiRepoAbstract
     {
         $jsonResponse = json_decode($response->getBody()->getContents());
         foreach ($jsonResponse->items as $item) {
-            yield [
-                'id' => $item->id,
-                'url' => "playlist/{$item->id}",
-                'image' => is_array($item->images) ? $item->images[0]->url : '',
-                'name' => $item->name,
-            ];
+            yield $this->parseItem($item);
         }
     }
 
     abstract protected function hydrateItem(array $item): Object;
 
+    abstract protected function parseItem(StdClass $item): array;
 
 }

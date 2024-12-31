@@ -1,6 +1,7 @@
 <?php
 require_once "../src/autoload.php";
 require_once "../vendor/autoload.php";
+require_once "../src/utils/trace.php";
 
 use GuzzleHttp\Exception\RequestException;
 use service\GetUserPlaylists;

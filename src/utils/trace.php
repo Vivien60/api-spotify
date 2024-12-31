@@ -1,4 +1,6 @@
 <?php
+
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 
 define('LOG_FILE', dirname(__FILE__,3)."/log/trace.log");
@@ -26,6 +28,9 @@ function traceException(Throwable|Exception $e, string $message): void
 {
     trace($message);
     trace($e->getMessage() . ': ' . print_r($e->getTrace(), 1));
+    if($e->getPrevious() instanceof RequestException) {
+        traceRequestException($e->getPrevious(), $e->getPrevious()->getMessage());
+    }
 }
 
 function trace(string|Stringable $message) : void

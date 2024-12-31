@@ -8,6 +8,7 @@ use infrastructure\repository\ApiRepoAbstract;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use model\Playlist\Playlist as PlaylistItem;
 use model\User\User;
+use stdClass;
 
 class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 {
@@ -27,6 +28,16 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
     {
         $result = $this->musicService->playlistFromUser($user);
         return $this->parseQResponse($result);
+    }
+
+    protected function parseItem(StdClass $item): array
+    {
+        return [
+            'id' => $item->id,
+            'url' => "playlist/{$item->id}",
+            'image' => is_array($item->images) ? $item->images[0]->url : '',
+            'name' => $item->name,
+        ];
     }
 
     /**

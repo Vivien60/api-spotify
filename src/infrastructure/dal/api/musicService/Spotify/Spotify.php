@@ -19,6 +19,7 @@ use infrastructure\entity\TokenItem;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use model\User\User;
 use Psr\Http\Message\ResponseInterface;
+use stdClass;
 use Throwable;
 
 class Spotify implements PlaylistServiceInterface, OAuthInterface
@@ -50,20 +51,26 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         return new UrlForCode($this->clientOAuth, $config::$CLIENT_ID, $config::$REDIRECT_URI);
     }
 
-    public function playlistFromUser(User $user):ResponseInterface
+    public function playlistFromUser(User $user, $retry = true):ResponseInterface
     {
         $auth = $this->getUserAuth($user);
         $request = $this->requestFactory->playlistsMine($auth);
-
-        return $this->handleRequest($request);
+        try {
+            return $this->handleRequest($request);
+        } catch(AuthError $e) {
+            return $this->refreshTokenThenRetry($request, $user,__METHOD__);
+        }
     }
 
     public function songsFromUserPlaylist(User $user, int|string $idPlaylist):ResponseInterface
     {
         $auth = $this->getUserAuth($user);
         $request = $this->requestFactory->playlistTracks($auth, $idPlaylist);
-
-        return $this->handleRequest($request);
+        try {
+            return $this->handleRequest($request);
+        } catch(AuthError $e) {
+            return $this->refreshTokenThenRetry($request, $user,__METHOD__);
+        }
     }
 
     protected function getUserAuth(User $user): ?\infrastructure\entity\TokenItem
@@ -76,28 +83,6 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
      */
     protected function handleRequest(EndpointRequestInterface $request): ResponseInterface
     {
-        try {
-            return $this->client->sendRequest($request);
-        } catch(AuthError $e) {
-            if(is_a($request, WithBearerTokenInterface::class)) {
-                $this->refreshToken($request->token);
-                return $this->client->sendRequest($request);
-            } else {
-                throw $e;
-            }
-        }
-    }
-
-    /**
-     * @throws Throwable
-     */
-    protected function refreshToken($token): ResponseInterface
-    {
-        $request = $this->requestFactory->refreshToken(
-            $this->config::$CLIENT_ID,
-            $this->config::$CLIENT_SECRET,
-            $token
-        );
         return $this->client->sendRequest($request);
     }
 
@@ -107,7 +92,6 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
      */
     public function tokenFromCode(string $code): TokenItem
     {
-        trace('tokenFromCode');
         $request = $this->requestFactory->tokenFromCode($this->appAuth, $this->config::$REDIRECT_URI, $code);
         $response = $this->clientOAuth->sendRequest($request);
         $token = json_decode($response->getBody());
@@ -118,4 +102,47 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         }
     }
 
+    private function refreshTokenThenRetry(
+        EndpointRequestInterface&WithBearerTokenInterface $request,
+        User $user,
+        string $methodName
+    ) {
+        $this->refreshToken($request, $user);
+        return call_user_func_array([$this, $methodName], [$user, false]);
+    }
+
+
+    /**
+     * @throws Throwable
+     */
+    protected function refreshToken(EndpointRequestInterface $request, User $user): TokenItem
+    {
+        if(is_a($request, WithBearerTokenInterface::class)) {
+            $response = $this->refreshTokenRequest($request->token);
+            $token = json_decode($response->getBody());
+            return $this->saveNewToken($token, $user, $request->token);
+        }
+        throw new \exception\AuthError("There was an error while refreshing token");
+    }
+
+    private function refreshTokenRequest(TokenItem $token)
+    {
+        $request = $this->requestFactory->refreshToken(
+            $this->config::$CLIENT_ID,
+            $this->config::$CLIENT_SECRET,
+            $token
+        );
+        return $this->clientOAuth->sendRequest($request);
+    }
+
+    public function saveNewToken(StdClass $token, User $user, TokenItem $oldToken): TokenItem
+    {
+        if ($token?->access_token) {
+            $oldToken->accessToken = $token->access_token;
+            $newToken = new TokenItem($token, $oldToken->accessToken, $oldToken->refreshToken, true);
+            $this->config->authUserRepo->add($newToken);
+            return $newToken;
+        }
+        throw new \exception\AuthError("There was an error while refreshing token");
+    }
 }
