@@ -55,35 +55,19 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
     {
         $auth = $this->getUserAuth($user);
         $request = $this->requestFactory->playlistsMine($auth);
-        try {
-            return $this->handleRequest($request);
-        } catch(AuthError $e) {
-            return $this->refreshTokenThenRetry($request, $user,__METHOD__);
-        }
+        return $this->handleRequestWithRefresh($request, $user);
     }
 
     public function songsFromUserPlaylist(User $user, int|string $idPlaylist):ResponseInterface
     {
         $auth = $this->getUserAuth($user);
         $request = $this->requestFactory->playlistTracks($auth, $idPlaylist);
-        try {
-            return $this->handleRequest($request);
-        } catch(AuthError $e) {
-            return $this->refreshTokenThenRetry($request, $user,__METHOD__);
-        }
+        return $this->handleRequestWithRefresh($request, $user);
     }
 
     protected function getUserAuth(User $user): ?\infrastructure\entity\TokenItem
     {
         return $this->config->authUserRepo->fetchById($user);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    protected function handleRequest(EndpointRequestInterface $request): ResponseInterface
-    {
-        return $this->client->sendRequest($request);
     }
 
     /**
@@ -100,6 +84,24 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         } else {
             throw new \exception\AuthError("There was an error while sending token request");
         }
+    }
+    private function handleRequestWithRefresh(
+        EndpointRequestInterface&WithBearerTokenInterface $request,
+        User $user
+    ): ResponseInterface {
+        try {
+            return $this->handleRequest($request);
+        } catch (AuthError $e) {
+            return $this->refreshTokenThenRetry($request, $user, __METHOD__);
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    protected function handleRequest(EndpointRequestInterface $request): ResponseInterface
+    {
+        return $this->client->sendRequest($request);
     }
 
     private function refreshTokenThenRetry(
@@ -118,25 +120,25 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
     protected function refreshToken(EndpointRequestInterface $request, User $user): TokenItem
     {
         if(is_a($request, WithBearerTokenInterface::class)) {
-            $response = $this->refreshTokenRequest($request->token);
-            $token = json_decode($response->getBody());
-            return $this->saveNewToken($token, $user, $request->token);
+            $refreshRequest = $this->requestFactory->refreshToken(
+                $this->config::$CLIENT_ID,
+                $this->config::$CLIENT_SECRET,
+                $request->token
+            );
+            $response = $this->handleOAuthRequest($refreshRequest);
+            return $this->saveNewTokenFromResponse($response, $user, $request->token);
         }
         throw new \exception\AuthError("There was an error while refreshing token");
     }
 
-    private function refreshTokenRequest(TokenItem $token)
+    protected function handleOAuthRequest(EndpointRequestInterface $request): ResponseInterface
     {
-        $request = $this->requestFactory->refreshToken(
-            $this->config::$CLIENT_ID,
-            $this->config::$CLIENT_SECRET,
-            $token
-        );
         return $this->clientOAuth->sendRequest($request);
     }
 
-    public function saveNewToken(StdClass $token, User $user, TokenItem $oldToken): TokenItem
+    public function saveNewTokenFromResponse(ResponseInterface $response, User $user, TokenItem $oldToken): TokenItem
     {
+        $token = json_decode($response->getBody());
         if ($token?->access_token) {
             $oldToken->accessToken = $token->access_token;
             $newToken = new TokenItem($token, $oldToken->accessToken, $oldToken->refreshToken, true);
