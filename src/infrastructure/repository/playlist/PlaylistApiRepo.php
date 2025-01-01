@@ -7,6 +7,7 @@ use contracts\PlaylistRepoInterface;
 use infrastructure\repository\ApiRepoAbstract;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use model\Playlist\Playlist as PlaylistItem;
+use model\Song\Song;
 use model\User\User;
 use stdClass;
 
@@ -20,24 +21,18 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 
     public function findById(int|string $id, User $user): ?PlaylistItem
     {
-        $this->musicService->songsFromUserPlaylist($user, $id);
-        return null;
+        $playlist = new PlaylistItem();
+        $playlist->id = $id;
+        $results = $this->musicService->tracksFromUserPlaylist($user, $id);
+        $playlist->songs = array_map([$this, 'hydrateSongItem'], $results);
+
+        return $playlist;
     }
 
     public function findByUser(User $user): ?array
     {
-        $result = $this->musicService->playlistFromUser($user);
-        return $this->parseQResponse($result);
-    }
-
-    protected function parseItem(StdClass $item): array
-    {
-        return [
-            'id' => $item->id,
-            'url' => "playlist/{$item->id}",
-            'image' => is_array($item->images) ? $item->images[0]->url : '',
-            'name' => $item->name,
-        ];
+        $results = $this->musicService->playlistsFromUser($user);
+        return array_map([$this, 'hydrateItem'], $results);
     }
 
     /**
@@ -51,6 +46,20 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
         $item->title = $playlist['name'];
         $item->url = $playlist['url'];
         $item->imageUrl = $playlist['image'];
+        return $item;
+    }
+
+    /**
+     * @param array{title: string, url: string, image: string, artist: string} $track
+     * @return Song
+     */
+    protected function hydrateSongItem(array $track): Song
+    {
+        $item = new Song();
+        $item->title = $track['title'];
+        $item->url = $track['url'];
+        $item->imageUrl = $track['image'];
+        $item->artist = $track['artist'];
         return $item;
     }
 }

@@ -8,6 +8,7 @@ use infrastructure\repository\ApiRepoAbstract;
 use infrastructure\repository\song\contracts\SongServiceInterface;
 use model\Playlist\Playlist as PlaylistItem;
 use model\Song\Song as SongItem;
+use stdClass;
 
 class SongApiRepo extends ApiRepoAbstract implements SongRepoInterface
 {
@@ -41,5 +42,10 @@ class SongApiRepo extends ApiRepoAbstract implements SongRepoInterface
         $item->imageUrl = $song['image'];
         $item->artist = $song['artist'];
         return $item;
+    }
+
+    protected function parseItem(stdClass $item): array
+    {
+        // TODO: Implement parseItem() method.
     }
 }

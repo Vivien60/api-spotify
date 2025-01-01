@@ -17,6 +17,7 @@ use infrastructure\dal\api\utils\OAuth\SecretAuth;
 use infrastructure\dal\api\utils\OAuth\UrlForCode;
 use infrastructure\entity\TokenItem;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
+use model\Playlist\BusinessLogic\PlaylistItem;
 use model\User\User;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
@@ -51,18 +52,22 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         return new UrlForCode($this->clientOAuth, $config::$CLIENT_ID, $config::$REDIRECT_URI);
     }
 
-    public function playlistFromUser(User $user, $retry = true):ResponseInterface
+    public function playlistsFromUser(User $user, $retry = true):array
     {
         $auth = $this->getUserAuth($user);
         $request = $this->requestFactory->playlistsMine($auth);
-        return $this->handleRequestWithRefresh($request, $user);
+        $response = $this->handleRequestWithRefresh($request, $user);
+        $parsedResponse = $this->parseResponse($response);
+        return $this->parseForPlaylists($parsedResponse->items);
     }
 
-    public function songsFromUserPlaylist(User $user, int|string $idPlaylist):ResponseInterface
+    public function tracksFromUserPlaylist(User $user, int|string $idPlaylist):array
     {
         $auth = $this->getUserAuth($user);
         $request = $this->requestFactory->playlistTracks($auth, $idPlaylist);
-        return $this->handleRequestWithRefresh($request, $user);
+        $response = $this->handleRequestWithRefresh($request, $user);
+        $parsedResponse = $this->parseResponse($response);
+        return $this->parseForTracks($parsedResponse->items);
     }
 
     protected function getUserAuth(User $user): ?\infrastructure\entity\TokenItem
@@ -146,5 +151,50 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
             return $newToken;
         }
         throw new \exception\AuthError("There was an error while refreshing token");
+    }
+
+    public function parseResponse(ResponseInterface $response): ?StdClass
+    {
+        return json_decode($response->getBody()->getContents());
+    }
+
+    private function parseForPlaylists(array $items) : array
+    {
+        $playlists = [];
+        foreach($items as $item)
+        {
+            $playlists[] = $this->parsePlaylistItem($item);
+        }
+        return $playlists;
+    }
+
+    public function parsePlaylistItem(StdClass $item): array
+    {
+        return [
+            'id' => $item->id,
+            'url' => "playlist/{$item->id}",
+            'image' => is_array($item->images) ? $item->images[0]->url : '',
+            'name' => $item->name,
+        ];
+    }
+
+    private function parseForTracks(array $items) : array
+    {
+        $tracks = [];
+        foreach($items as $item)
+        {
+            $tracks[] = $this->parseTrackItem($item);
+        }
+        return $tracks;
+    }
+
+    public function parseTrackItem(StdClass $item): array
+    {
+        $song = [];
+        $song['artist'] = is_array($item?->track?->artists) ? $item->track->artists[0]?->name : '';
+        $song['title'] = $item?->track?->name ?: '';
+        $song['url'] = "/lyrics/{$song['title']}+{$song['artist']}";
+        $song['image'] = is_array($item?->track?->album?->images) ? $item->track->album->images[0]->url : '';
+        return $song;
     }
 }

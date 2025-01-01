@@ -16,7 +16,7 @@ abstract class ApiRepoAbstract
     {
     }
 
-    protected function parseQResponse(ResponseInterface $response): array
+    /*protected function parseQResponse(ResponseInterface $response): array
     {
         $items = [];
         foreach ($this->parseResponseItems($response) as $playlist) {
@@ -27,14 +27,10 @@ abstract class ApiRepoAbstract
 
     protected function parseResponseItems(ResponseInterface $response): \Iterator
     {
-        $jsonResponse = json_decode($response->getBody()->getContents());
-        foreach ($jsonResponse->items as $item) {
+        $items = $this->musicService->parseResponse($response);
+        foreach ($items as $item) {
             yield $this->parseItem($item);
         }
-    }
-
-    abstract protected function hydrateItem(array $item): Object;
-
-    abstract protected function parseItem(StdClass $item): array;
+    }*/
 
 }
