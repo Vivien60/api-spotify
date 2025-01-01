@@ -17,7 +17,6 @@ define('TOKEN_STORAGE_FILE', dirname(__FILE__,2).DIRECTORY_SEPARATOR.'data'.DIRE
 
 const API_BASE_URL = 'https://api.spotify.com/v1/';
 const TOKEN_BASE_URL = 'https://accounts.spotify.com/';
-const REDIRECT_URI = '____';
 const SCOPE = 'user-library-modify app-remote-control playlist-modify-private playlist-modify-public playlist-read-collaborative playlist-read-private streaming user-follow-read user-library-read user-modify-playback-state user-read-currently-playing user-read-email user-read-playback-position user-read-playback-state user-read-private user-read-recently-played user-top-read';
 const LYRICS_API_BASE_URL = 'https://api.lyrics.ovh/v1/';
 const CURRENT_SPOTIFY_ACCOUNT = 0;
@@ -32,7 +31,6 @@ class Config {
     public static string $CLIENT_ID;
     public static string $CLIENT_SECRET;
     public static string $REDIRECT_URI;
-
     private static $instance;
     public UserRepo $userRepo {
         get =>  $this->userRepo??=new UserRepo();
