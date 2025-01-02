@@ -2,7 +2,6 @@
 namespace config;
 
 use contracts\PlaylistRepoInterface;
-use infrastructure\dal\api\LyricsOvh\client\Client;
 use infrastructure\dal\api\musicService\MusicServiceFactory;
 use infrastructure\dal\api\musicService\OAuthInterface;
 use infrastructure\repository\auth\FileAuthUserRepo;
@@ -56,11 +55,7 @@ class Config {
     }
 
     public SongServiceInterface $songService {
-        get {
-            (!empty($this->songService)?:
-                new Client()
-            );
-        }
+        get => $this->songService??=MusicServiceFactory::lyricsOvh();
         set(SongServiceInterface $value) {}
     }
 

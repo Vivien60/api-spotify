@@ -7,7 +7,10 @@ class Song
     public string $title;
     public string $url;
     public string $imageUrl;
-    public string $lyrics;
+    public string $lyrics {
+        get => nl2br($this->lyrics);
+        set(string $value) => $value;
+    }
     public string $artist;
 
     public function __construct()

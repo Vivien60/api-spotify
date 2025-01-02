@@ -6,18 +6,15 @@ use config\Config;
 use exception\AuthError;
 use infrastructure\dal\api\ClientAbstract;
 use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
-use infrastructure\dal\api\contracts\internal\UrlForCodeAbstract;
 use infrastructure\dal\api\contracts\internal\WithBearerTokenInterface;
 use infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
 use infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
 use infrastructure\dal\api\musicService\contracts\PlaylistRqFactoryInterface;
 use infrastructure\dal\api\musicService\OAuthInterface;
-use infrastructure\dal\api\utils\OAuth\BearerToken;
 use infrastructure\dal\api\utils\OAuth\SecretAuth;
 use infrastructure\dal\api\utils\OAuth\UrlForCode;
 use infrastructure\entity\TokenItem;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
-use model\Playlist\BusinessLogic\PlaylistItem;
 use model\User\User;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
@@ -46,7 +43,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
     {
     }
 
-    public function urlForCode(): UrlForCodeAbstract
+    public function urlForCode(): UrlForCode
     {
         $config = $this->config;
         return new UrlForCode($this->clientOAuth, $config::$CLIENT_ID, $config::$REDIRECT_URI);

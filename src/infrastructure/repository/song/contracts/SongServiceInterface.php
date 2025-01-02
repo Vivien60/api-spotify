@@ -8,5 +8,5 @@ use Psr\Http\Message\ResponseInterface;
 
 interface SongServiceInterface extends MusicServiceInterface
 {
-    public function songFromSongProp(SongItem $song):ResponseInterface;
+    public function lyricsFromSongProp(SongItem $song):string;
 }

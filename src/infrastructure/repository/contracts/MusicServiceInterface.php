@@ -7,5 +7,4 @@ use stdClass;
 
 interface MusicServiceInterface
 {
-    public function parseResponse(ResponseInterface $response): ?StdClass;
 }

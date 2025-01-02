@@ -24,10 +24,10 @@ class SongApiRepo extends ApiRepoAbstract implements SongRepoInterface
         return null;
     }
 
-    public function findBySongInfo(SongItem $songItem): ?array
+    public function findBySongInfo(SongItem $songItem): ?SongItem
     {
-        $result = $this->musicService->songFromSongProp($songItem);
-        return $this->parseQResponse($result);
+        $songItem->lyrics = $this->musicService->lyricsFromSongProp($songItem);
+        return $songItem;
     }
 
     /**
@@ -42,10 +42,5 @@ class SongApiRepo extends ApiRepoAbstract implements SongRepoInterface
         $item->imageUrl = $song['image'];
         $item->artist = $song['artist'];
         return $item;
-    }
-
-    protected function parseItem(stdClass $item): array
-    {
-        // TODO: Implement parseItem() method.
     }
 }

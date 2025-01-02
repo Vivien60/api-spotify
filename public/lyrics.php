@@ -9,7 +9,6 @@ use exception\NotFoundE;
 
 session_start();
 
-
 $song = new Song();
 $song->artist = $_GET["artist"];
 $song->title = $_GET["item"];

@@ -11,5 +11,5 @@ interface SongRepoInterface
      * @param SongItem $songItem
      * @return null|array{title: string, url: string, image: string, artist: string}
      */
-    public function findBySongInfo(SongItem $songItem): ?array;
+    public function findBySongInfo(SongItem $songItem): ?SongItem;
 }
