@@ -2,19 +2,18 @@
 declare(strict_types=1);
 namespace infrastructure\repository\song;
 
-use config\Config;
+use service\contracts\ConfigInterface;
 use contracts\SongRepoInterface;
 use infrastructure\repository\ApiRepoAbstract;
 use infrastructure\repository\song\contracts\SongServiceInterface;
-use model\Playlist\Playlist as PlaylistItem;
 use model\Song\Song as SongItem;
-use stdClass;
 
 class SongApiRepo extends ApiRepoAbstract implements SongRepoInterface
 {
+    public static ConfigInterface $config;
     public function __construct(?SongServiceInterface $service = null)
     {
-        $this->musicService = $service?:Config::getInstance()->songService;
+        $this->musicService = $service?:self::$config->songService;
         parent::__construct();
     }
 

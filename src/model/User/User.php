@@ -2,10 +2,11 @@
 
 namespace model\User;
 
-use config\Config;
+use service\contracts\ConfigInterface;
 
 class User
 {
+    public static ConfigInterface $config;
     public readonly mixed $id;
 
     /**
@@ -13,7 +14,6 @@ class User
      */
     public function __construct(mixed $id=null)
     {
-        $config = Config::getInstance();
-        $this->id = $id?:$config::CURRENT_SPOTIFY_ACCOUNT;
+        $this->id = $id?:self::$config::CURRENT_SPOTIFY_ACCOUNT;
     }
 }

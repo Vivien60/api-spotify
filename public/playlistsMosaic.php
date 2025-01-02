@@ -3,12 +3,16 @@ require_once "../src/autoload.php";
 require_once "../vendor/autoload.php";
 require_once "../src/utils/trace.php";
 
+use config\Config;
 use GuzzleHttp\Exception\RequestException;
+use service\ConfigDispatcher;
 use service\GetUserPlaylists;
 use view\layouts\ConnectedLayout;
 use view\templates\components\Mosaic;
 use view\templates\Playlists;
 session_start();
+ConfigDispatcher::dispatch(Config::getInstance());
+
 try {
     $getPlaylists = new GetUserPlaylists();
     $myPlaylists = $getPlaylists->forCurrentUser();

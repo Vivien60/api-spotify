@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace infrastructure\repository\playlist;
 
-use config\Config;
+use service\contracts\ConfigInterface;
 use contracts\PlaylistRepoInterface;
 use infrastructure\repository\ApiRepoAbstract;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
@@ -13,9 +13,11 @@ use stdClass;
 
 class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 {
+    public static ConfigInterface $config;
+
     public function __construct(?PlaylistServiceInterface $service = null)
     {
-        $this->musicService = $service?:Config::getInstance()->playlistService;
+        $this->musicService = $service?:self::$config->playlistService;
         parent::__construct();
     }
 

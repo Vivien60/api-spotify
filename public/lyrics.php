@@ -2,19 +2,21 @@
 require_once "../src/autoload.php";
 require_once "../config/Config.php";
 
-use infrastructure\repository\song\SongApiRepo;
-use model\Song\Song;
-use view\layouts\ConnectedLayout;
+use config\Config;
 use exception\NotFoundE;
+use model\Song\Song;
+use service\ConfigDispatcher;
+use view\layouts\ConnectedLayout;
 
 session_start();
+ConfigDispatcher::dispatch(Config::getInstance());
 
 $song = new Song();
 $song->artist = $_GET["artist"];
 $song->title = $_GET["item"];
 
 try {
-    $repo = new SongApiRepo();
+    $repo = Config::getInstance()->songRepo;
     $song = $repo->findBySongInfo($song);
 } catch (NotFoundE $e) {
     $song->lyrics = "No lyrics found for this song.";

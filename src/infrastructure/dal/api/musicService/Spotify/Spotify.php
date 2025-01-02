@@ -2,7 +2,7 @@
 
 namespace infrastructure\dal\api\musicService\Spotify;
 
-use config\Config;
+use service\contracts\ConfigInterface;
 use exception\AuthError;
 use infrastructure\dal\api\ClientAbstract;
 use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
@@ -22,15 +22,10 @@ use Throwable;
 
 class Spotify implements PlaylistServiceInterface, OAuthInterface
 {
-    private Config $config {
-        get {
-            $this->config ??= Config::getInstance();
-            return $this->config;
-        }
-    }
+    public static ConfigInterface $config;
     private SecretAuth $appAuth {
         get {
-            $this->appAuth ??= new SecretAuth($this->config::$CLIENT_ID, $this->config::$CLIENT_SECRET);
+            $this->appAuth ??= new SecretAuth(self::$config->CLIENT_ID, self::$config->CLIENT_SECRET);
             return $this->appAuth;
         }
     }
@@ -45,8 +40,8 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
 
     public function urlForCode(): UrlForCode
     {
-        $config = $this->config;
-        return new UrlForCode($this->clientOAuth, $config::$CLIENT_ID, $config::$REDIRECT_URI);
+        $config = self::$config;
+        return new UrlForCode($this->clientOAuth, $config->CLIENT_ID, $config->REDIRECT_URI);
     }
 
     public function playlistsFromUser(User $user, $retry = true):array
@@ -69,7 +64,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
 
     protected function getUserAuth(User $user): ?\infrastructure\entity\TokenItem
     {
-        return $this->config->authUserRepo->fetchById($user);
+        return self::$config->authUserRepo->fetchById($user);
     }
 
     /**
@@ -78,7 +73,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
      */
     public function tokenFromCode(string $code): TokenItem
     {
-        $request = $this->requestFactory->tokenFromCode($this->appAuth, $this->config::$REDIRECT_URI, $code);
+        $request = $this->requestFactory->tokenFromCode($this->appAuth, self::$config->REDIRECT_URI, $code);
         $response = $this->clientOAuth->sendRequest($request);
         $token = json_decode($response->getBody());
         if($token?->access_token) {
@@ -123,8 +118,8 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
     {
         if(is_a($request, WithBearerTokenInterface::class)) {
             $refreshRequest = $this->requestFactory->refreshToken(
-                $this->config::$CLIENT_ID,
-                $this->config::$CLIENT_SECRET,
+                self::$config->CLIENT_ID,
+                self::$config->CLIENT_SECRET,
                 $request->token
             );
             $response = $this->handleOAuthRequest($refreshRequest);
@@ -144,7 +139,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         if ($token?->access_token) {
             $oldToken->accessToken = $token->access_token;
             $newToken = new TokenItem($token, $oldToken->accessToken, $oldToken->refreshToken, true);
-            $this->config->authUserRepo->add($newToken);
+            self::$config->authUserRepo->add($newToken);
             return $newToken;
         }
         throw new \exception\AuthError("There was an error while refreshing token");

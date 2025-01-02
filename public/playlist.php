@@ -2,12 +2,15 @@
 require_once dirname(__FILE__,2) . "/src/autoload.php";
 require_once dirname(__FILE__,2).DIRECTORY_SEPARATOR."src".DIRECTORY_SEPARATOR."utils".DIRECTORY_SEPARATOR."trace.php";
 
+use config\Config;
+use service\ConfigDispatcher;
 use exception\NotFoundE;
 use view\layouts\ConnectedLayout;
 use view\templates\components\Mosaic;
 use view\templates\Playlist;
 
 session_start();
+ConfigDispatcher::dispatch(Config::getInstance());
 
 $service = new \service\GetUserPlaylists();
 try {

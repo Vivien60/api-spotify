@@ -1,14 +1,24 @@
 <?php
-
 namespace service;
 
-use config\Config;
+use service\contracts\ConfigInterface;
+use contracts\PlaylistRepoInterface;
+use contracts\UserRepoInterface;
 use model\Playlist\Playlist;
 use model\User\User;
 
 class GetUserPlaylists
 {
+    public static ConfigInterface $config;
     private User $user;
+    private PlaylistRepoInterface $playlistRepo;
+    private UserRepoInterface $userRepo;
+
+    public function __construct()
+    {
+        $this->playlistRepo = self::$config->playlistRepo;
+        $this->userRepo = self::$config->userRepo;
+    }
 
     /**
      * @return array<Playlist>
@@ -21,8 +31,7 @@ class GetUserPlaylists
 
     private function getCurrentUser(): ?User
     {
-        $userRepo = Config::getInstance()->userRepo;
-        return $userRepo->findCurrentUser();
+        return $this->userRepo->findCurrentUser();
     }
 
     /**
@@ -31,13 +40,11 @@ class GetUserPlaylists
      */
     public function playlistsByUser(User $user):array
     {
-        $repo = Config::getInstance()->playlistRepo;
-        return $repo->findByUser($user);
+        return $this->playlistRepo->findByUser($user);
     }
     public function byPlaylistIdForCurrentUser(int|string $playlistId): Playlist
     {
         $me = $this->getCurrentUser();
-        $repo = Config::getInstance()->playlistRepo;
-        return $repo->findById($playlistId, $me);
+        return $this->playlistRepo->findById($playlistId, $me);
     }
 }

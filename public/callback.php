@@ -2,11 +2,13 @@
 require_once "../src/autoload.php";
 require_once "../src/utils/trace.php";
 
+use config\Config;
 use GuzzleHttp\Exception\RequestException;
+use service\ConfigDispatcher;
 use service\GetUserToken;
 
 session_start();
-
+ConfigDispatcher::dispatch(Config::getInstance());
 /**
  * @TODO Vivien : gestion de l'affichage de l'erreur
  */
