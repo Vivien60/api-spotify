@@ -5,13 +5,13 @@ namespace model\Song;
 class Song
 {
     public string $title;
-    public string $url;
-    public string $imageUrl;
-    public string $lyrics {
+    public string $artist;
+    public string $url = '';
+    public string $imageUrl = '';
+    public string $lyrics = '' {
         get => nl2br($this->lyrics);
         set(string $value) => $value;
     }
-    public string $artist;
 
     public function __construct()
     {
@@ -30,5 +30,26 @@ class Song
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    public static function fromArray(array $track): self
+    {
+        $item = new static();
+        $item->title = $track['title'];
+        $item->artist = $track['artist'];
+        $item->url = $track['url'] ?? $item->url;
+        $item->imageUrl = $track['image'] ?? $item->imageUrl;
+        return $item;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'title'     => $this->title,
+            'url'       => $this->url,
+            'image'     => $this->imageUrl,
+            'lyrics'    => $this->lyrics,
+            'artist'    => $this->artist,
+        ];
     }
 }

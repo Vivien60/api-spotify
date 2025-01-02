@@ -32,4 +32,34 @@ class Playlist
         return $this->title;
     }
 
+    public function addSong(Song $song): void
+    {
+        $this->songs[] = $song;
+    }
+
+    public static function fromArray(array $playlist): self
+    {
+        $item = new static();
+        $item->id = $playlist['id'];
+        $item->title = $playlist['name'] ?? $item->title;
+        $item->url = $playlist['url'] ?? $item->url;
+        $item->imageUrl = $playlist['image'] ?? $item->imageUrl;
+        if(isset($playlist['songs']))
+            foreach ($playlist['songs'] as $songData) {
+                $item->addSong(Song::fromArray($songData));
+            }
+        return $item;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->title,
+            'url' => $this->url,
+            'image' => $this->imageUrl,
+            'songs' => array_map([Song::class, 'fromArray'], $this->songs)
+        ];
+    }
+
 }

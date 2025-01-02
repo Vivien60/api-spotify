@@ -7,9 +7,7 @@ use contracts\PlaylistRepoInterface;
 use infrastructure\repository\ApiRepoAbstract;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use model\Playlist\Playlist as PlaylistItem;
-use model\Song\Song;
 use model\User\User;
-use stdClass;
 
 class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 {
@@ -23,12 +21,8 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 
     public function findById(int|string $id, User $user): ?PlaylistItem
     {
-        $playlist = new PlaylistItem();
-        $playlist->id = $id;
-        $results = $this->musicService->tracksFromUserPlaylist($user, $id);
-        $playlist->songs = array_map([$this, 'hydrateSongItem'], $results);
-
-        return $playlist;
+        $songs = $this->musicService->tracksFromUserPlaylist($user, $id);
+        return $this->hydrateItem(["id" => $id, "songs" => $songs]) ;
     }
 
     public function findByUser(User $user): ?array
@@ -38,30 +32,11 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
     }
 
     /**
-     * @param array{id: string, url: string, image: string, name: string} $playlist
+     * @param array{id: string, url: string, image: string, name: string, songs: array{title: string, url: string, image: string, artist: string} } $playlist
      * @return PlaylistItem
      */
     protected function hydrateItem(array $playlist): PlaylistItem
     {
-        $item = new PlaylistItem();
-        $item->id = $playlist['id'];
-        $item->title = $playlist['name'];
-        $item->url = $playlist['url'];
-        $item->imageUrl = $playlist['image'];
-        return $item;
-    }
-
-    /**
-     * @param array{title: string, url: string, image: string, artist: string} $track
-     * @return Song
-     */
-    protected function hydrateSongItem(array $track): Song
-    {
-        $item = new Song();
-        $item->title = $track['title'];
-        $item->url = $track['url'];
-        $item->imageUrl = $track['image'];
-        $item->artist = $track['artist'];
-        return $item;
+        return PlaylistItem::fromArray($playlist);
     }
 }

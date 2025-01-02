@@ -35,11 +35,6 @@ class SongApiRepo extends ApiRepoAbstract implements SongRepoInterface
      */
     protected function hydrateItem(array $song): SongItem
     {
-        $item = new SongItem();
-        $item->title = $song['title'];
-        $item->url = $song['url'];
-        $item->imageUrl = $song['image'];
-        $item->artist = $song['artist'];
-        return $item;
+        return SongItem::fromArray($song);
     }
 }
