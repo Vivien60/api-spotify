@@ -2,6 +2,8 @@
 
 namespace service;
 
+use infrastructure\dal\api\Spotify\request\RequestFactory;
+use model\User\Singer;
 use service\contracts\ConfigInterface;
 use infrastructure\dal\api\musicService\Spotify\Spotify;
 use infrastructure\repository\playlist\PlaylistApiRepo;
@@ -20,6 +22,8 @@ class ConfigDispatcher
         GetUserToken::$config = $config;
         GetUserPlaylists::$config = $config;
         User::$config = $config;
+        RequestFactory::$config = $config;
+        Singer::$config = $config;
     }
     
     public static function dispatch(ConfigInterface $config) : void

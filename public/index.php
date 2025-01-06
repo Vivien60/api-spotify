@@ -26,6 +26,10 @@ var_dump($_SESSION);
  *      Vérification de la validité des tokens avant chaque utilisation
  *      et implémentation d'un mécanisme de rafraîchissement automatique des tokens expirés.
  */
+/** @TODO Vivien:
+ *      Lyrics.ovh fait un timeout quand on l'interroge
+ */
+
 ?>
 <htmL lang="fr">
 <head><title>Benveniidoo !</title></head>

@@ -47,7 +47,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
     public function playlistsFromUser(User $user, $retry = true):array
     {
         $auth = $this->getUserAuth($user);
-        $request = $this->requestFactory->playlistsMine($auth);
+        $request = $this->requestFactory->playlistsMine($user);
         $response = $this->handleRequestWithRefresh($request, $user);
         $parsedResponse = $this->parseResponse($response);
         return $this->parseForPlaylists($parsedResponse->items);
@@ -55,16 +55,10 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
 
     public function tracksFromUserPlaylist(User $user, int|string $idPlaylist):array
     {
-        $auth = $this->getUserAuth($user);
-        $request = $this->requestFactory->playlistTracks($auth, $idPlaylist);
+        $request = $this->requestFactory->playlistTracks($user, $idPlaylist);
         $response = $this->handleRequestWithRefresh($request, $user);
         $parsedResponse = $this->parseResponse($response);
         return $this->parseForTracks($parsedResponse->items);
-    }
-
-    protected function getUserAuth(User $user): ?\infrastructure\entity\TokenItem
-    {
-        return self::$config->authUserRepo->fetchById($user);
     }
 
     /**

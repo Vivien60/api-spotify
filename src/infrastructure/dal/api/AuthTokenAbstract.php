@@ -3,10 +3,9 @@
 namespace infrastructure\dal\api;
 
 use infrastructure\dal\api\contracts\internal\AuthTokenInterface;
-use infrastructure\dal\api\contracts\internal\AuthTypeInterface;
 use infrastructure\entity\TokenItem;
 
-abstract class AuthTokenAbstract implements AuthTypeInterface, AuthTokenInterface, \Stringable
+abstract class AuthTokenAbstract implements AuthTokenInterface, \Stringable
 {
 
     public function __construct(protected TokenItem $token)

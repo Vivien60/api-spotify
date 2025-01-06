@@ -2,16 +2,19 @@
 
 namespace model\User;
 
+use service\contracts\ConfigInterface;
+
 class Singer
 {
     public readonly mixed $spotifyAccount;
 
     public readonly User $user;
 
+    public static ConfigInterface $config;
+
     public function __construct(?User $user = null, $spotifyAccount = null)
     {
         $this->user = $user?:new User();
-        $this->spotifyAccount = $spotifyAccount?:CURRENT_SPOTIFY_ACCOUNT;
+        $this->spotifyAccount = $spotifyAccount?:self::$config->currentSpotifyAccount;
     }
-
 }

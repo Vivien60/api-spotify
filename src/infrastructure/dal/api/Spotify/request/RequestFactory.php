@@ -6,17 +6,23 @@ use infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
 use infrastructure\dal\api\musicService\contracts\PlaylistRqFactoryInterface;
 use infrastructure\dal\api\utils\OAuth\SecretAuth;
 use infrastructure\entity\TokenItem;
+use model\User\User;
+use service\contracts\ConfigInterface;
 
 class RequestFactory implements PlaylistRqFactoryInterface, OauthRqFactoryInterface
 {
-    public function playlistsMine(TokenItem $token) : Playlist
+    public static ConfigInterface $config;
+
+    public function playlistsMine(User $user) : Playlist
     {
-        return Playlist::mine($token);
+        $auth = self::$config->authUserRepo->fetchById($user);
+        return Playlist::mine($auth);
     }
 
-    public function playlistTracks(TokenItem $token, string|int $idPlaylist) : PlaylistTracks
+    public function playlistTracks(User $user, string|int $idPlaylist) : PlaylistTracks
     {
-        return new PlaylistTracks($token, $idPlaylist);
+        $auth = self::$config->authUserRepo->fetchById($user);
+        return new PlaylistTracks($auth, $idPlaylist);
     }
 
     public function refreshToken(mixed $clientId, mixed $clientSecret, TokenItem $token) : RefreshToken

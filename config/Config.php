@@ -25,15 +25,13 @@ const CURRENT_SPOTIFY_ACCOUNT = 0;
 
 class Config implements ConfigInterface {
     private static $instance;
-    const API_BASE_URL = 'https://api.spotify.com/v1/';
-    const TOKEN_BASE_URL = 'https://accounts.spotify.com/';
-    const SCOPE = 'user-library-modify app-remote-control playlist-modify-private playlist-modify-public playlist-read-collaborative playlist-read-private streaming user-follow-read user-library-read user-modify-playback-state user-read-currently-playing user-read-email user-read-playback-position user-read-playback-state user-read-private user-read-recently-played user-top-read';
-    const LYRICS_API_BASE_URL = 'https://api.lyrics.ovh/v1/';
-    const TOKEN_STORAGE_FILE = TOKEN_STORAGE_FILE;
-    const CURRENT_SPOTIFY_ACCOUNT = 0;
-    public string $CLIENT_ID;
-    public string $CLIENT_SECRET;
-    public string $REDIRECT_URI;
+    public string $scope = 'user-library-modify app-remote-control playlist-modify-private playlist-modify-public playlist-read-collaborative playlist-read-private streaming user-follow-read user-library-read user-modify-playback-state user-read-currently-playing user-read-email user-read-playback-position user-read-playback-state user-read-private user-read-recently-played user-top-read';
+    public string $CLIENT_ID { get => $this->CLIENT_ID; }
+    public string $CLIENT_SECRET { get => $this->CLIENT_SECRET; }
+    public string $REDIRECT_URI { get => $this->REDIRECT_URI; }
+    public string $lyricsApiBaseUrl = 'https://api.lyrics.ovh/v1/';
+    public string $tokenStorageFile = TOKEN_STORAGE_FILE;
+    public string $currentSpotifyAccount = '0';
     public UserRepo $userRepo {
         get =>  $this->userRepo??=new UserRepo();
     }
@@ -44,7 +42,7 @@ class Config implements ConfigInterface {
         get =>  $this->playlistRepo??=new PlaylistApiRepo();
     }
     public AuthUserRepoInterface $authUserRepo {
-        get =>  $this->authUserRepo??= new FileAuthUserRepo(self::TOKEN_STORAGE_FILE);
+        get =>  $this->authUserRepo??= new FileAuthUserRepo($this->tokenStorageFile);
     }
 
     public MusicServiceInterface $musicService {

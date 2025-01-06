@@ -2,7 +2,6 @@
 
 namespace contracts;
 
-use model\Playlist\Playlist;
 use model\Song\Song as SongItem;
 
 interface SongRepoInterface

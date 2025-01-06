@@ -14,6 +14,6 @@ class User
      */
     public function __construct(mixed $id=null)
     {
-        $this->id = $id?:self::$config::CURRENT_SPOTIFY_ACCOUNT;
+        $this->id = $id?:self::$config->currentSpotifyAccount;
     }
 }
