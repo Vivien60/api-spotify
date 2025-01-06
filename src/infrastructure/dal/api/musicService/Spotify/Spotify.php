@@ -46,7 +46,6 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
 
     public function playlistsFromUser(User $user, $retry = true):array
     {
-        $auth = $this->getUserAuth($user);
         $request = $this->requestFactory->playlistsMine($user);
         $response = $this->handleRequestWithRefresh($request, $user);
         $parsedResponse = $this->parseResponse($response);
