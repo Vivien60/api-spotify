@@ -3,7 +3,7 @@
 namespace infrastructure\dal\api\Spotify\request;
 
 use Exception;
-use exception\AuthError;
+use exception\RequestAuthError;
 use infrastructure\dal\api\utils\OAuth\SecretAuth;
 use \infrastructure\dal\api\utils\OAuth\RefreshToken as OAuthRefreshToken;
 use infrastructure\entity\TokenItem;
@@ -35,6 +35,6 @@ class RefreshToken extends TokenRequestAbstract
 
     public function exception(Exception|Throwable $originException): Throwable
     {
-        return new AuthError("Refresh token failed", $originException);
+        return new RequestAuthError("Refresh token failed", $originException);
     }
 }

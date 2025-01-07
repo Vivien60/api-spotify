@@ -2,7 +2,7 @@
 
 namespace infrastructure\dal\api;
 
-use exception\AuthError;
+use exception\RequestAuthError;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
@@ -56,7 +56,7 @@ abstract class ClientAbstract
                 ]
             );
         } catch (GuzzleException $e) {
-            if($this->isAuthError($e)) throw new AuthError($e->getMessage(), $e);
+            if($this->isAuthError($e)) throw new RequestAuthError($e->getMessage(), $e);
             throw $request->exception($e);
         }
     }

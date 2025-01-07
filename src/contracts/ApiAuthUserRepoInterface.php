@@ -1,11 +1,11 @@
 <?php
 
-namespace infrastructure\repository;
+namespace contracts;
 
 use infrastructure\entity\TokenItem;
 use model\User\User;
 
-interface AuthUserRepoInterface
+interface ApiAuthUserRepoInterface
 {
     public function fetchById(?User $user = null): ?TokenItem;
     public function add(TokenItem $token, ?User $user = null): void;

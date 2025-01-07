@@ -13,9 +13,8 @@ use view\templates\Playlists;
 session_start();
 ConfigDispatcher::dispatch(Config::getInstance());
 
-if(empty($_SESSION["token"])){
-    die("Not allowed");
-}
+$serviceAuth = new \service\AuthenticatorService();
+$serviceAuth->authenticate();
 try {
     $getPlaylists = new GetUserPlaylists();
     $myPlaylists = $getPlaylists->forCurrentUser();

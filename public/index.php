@@ -7,7 +7,7 @@ var_dump($_SESSION);
  *          public static function mapError($response) {
  *              switch ($response->statusCode) {
  *                  case 401:
- *                      throw new AuthError("Authentication failed in Service A.");
+ *                      throw new RequestAuthError("Authentication failed in Service A.");
  *                  case 404:
  *                      throw new NotFoundError("Resource not found in Service A.");
  *                  case 500:
@@ -18,14 +18,17 @@ var_dump($_SESSION);
  *          }
  *      }
  */
+
 /**@TODO Vivien: Externalisation de la configuration :
  *      Externalisation de la configuration dans des fichiers JSON, YAML ou une base de données
  *      pour faciliter la gestion et les modifications des paramètres sans toucher au code.
  */
+
 /**@TODO Vivien: Amélioration de la gestion des sessions et des tokens :
  *      Vérification de la validité des tokens avant chaque utilisation
  *      et implémentation d'un mécanisme de rafraîchissement automatique des tokens expirés.
  */
+
 /** @TODO Vivien:
  *      Lyrics.ovh fait un timeout quand on l'interroge
  */

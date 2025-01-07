@@ -24,6 +24,7 @@ class ConfigDispatcher
         User::$config = $config;
         RequestFactory::$config = $config;
         Singer::$config = $config;
+        AuthenticatorService::$config = $config;
     }
     
     public static function dispatch(ConfigInterface $config) : void

@@ -2,11 +2,11 @@
 
 namespace infrastructure\repository\auth;
 
+use contracts\ApiAuthUserRepoInterface;
 use infrastructure\entity\TokenItem;
-use infrastructure\repository\AuthUserRepoInterface;
 use model\User\User;
 
-class FileAuthUserRepo implements AuthUserRepoInterface
+class FileApiAuthUserRepo implements ApiAuthUserRepoInterface
 {
 
     public string $tokenStorageFile = '';
@@ -19,7 +19,7 @@ class FileAuthUserRepo implements AuthUserRepoInterface
     public function add(TokenItem $token, ?User $user = null): void
     {
         file_put_contents($this->tokenStorageFile, json_encode($token));
-        $_SESSION['token'] = json_encode($token);
+        //$_SESSION['token'] = json_encode($token);
     }
 
     public function delete(TokenItem $token): void

@@ -14,7 +14,8 @@ class GetUserToken
         $me = $this->getCurrentUser();
         $service = self::$config->playlistService;
         $token = $service->tokenFromCode(htmlentities($_GET['code']));
-        self::$config->authUserRepo->add($token, $me);
+        self::$config->apiAuthUserRepo->add($token, $me);
+        self::$config->apiAuthUserInMemoryRepo->add($token, $me);
         return $token;
     }
 

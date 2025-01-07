@@ -2,11 +2,12 @@
 
 namespace service\contracts;
 
+use contracts\ApiAuthUserInMemoryRepoInterface;
+use contracts\ApiAuthUserRepoInterface;
 use contracts\PlaylistRepoInterface;
 use contracts\SongRepoInterface;
 use contracts\UserRepoInterface;
 use infrastructure\dal\api\musicService\OAuthInterface;
-use infrastructure\repository\AuthUserRepoInterface;
 use infrastructure\repository\contracts\MusicServiceInterface;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use infrastructure\repository\song\contracts\SongServiceInterface;
@@ -23,7 +24,8 @@ interface ConfigInterface
     public UserRepoInterface $userRepo { get; }
     public SongRepoInterface $songRepo { get; }
     public PlaylistRepoInterface $playlistRepo { get; }
-    public AuthUserRepoInterface $authUserRepo { get; }
+    public ApiAuthUserInMemoryRepoInterface $apiAuthUserInMemoryRepo { get; }
+    public ApiAuthUserRepoInterface $apiAuthUserRepo { get; }
     public MusicServiceInterface $musicService { get; }
     public PlaylistServiceInterface&OAuthInterface $playlistService { get; }
     public SongServiceInterface $songService { get; }

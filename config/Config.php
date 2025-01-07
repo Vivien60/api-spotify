@@ -1,12 +1,14 @@
 <?php
 namespace config;
 
+use contracts\ApiAuthUserInMemoryRepoInterface;
+use contracts\ApiAuthUserRepoInterface;
 use contracts\PlaylistRepoInterface;
 use contracts\SongRepoInterface;
 use infrastructure\dal\api\musicService\MusicServiceFactory;
 use infrastructure\dal\api\musicService\OAuthInterface;
-use infrastructure\repository\auth\FileAuthUserRepo;
-use infrastructure\repository\AuthUserRepoInterface;
+use infrastructure\repository\auth\ApiAuthUserInMemoryRepo;
+use infrastructure\repository\auth\FileApiAuthUserRepo;
 use infrastructure\repository\contracts\MusicServiceInterface;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use infrastructure\repository\playlist\PlaylistApiRepo;
@@ -41,8 +43,11 @@ class Config implements ConfigInterface {
     public PlaylistRepoInterface $playlistRepo {
         get =>  $this->playlistRepo??=new PlaylistApiRepo();
     }
-    public AuthUserRepoInterface $authUserRepo {
-        get =>  $this->authUserRepo??= new FileAuthUserRepo($this->tokenStorageFile);
+    public ApiAuthUserRepoInterface $apiAuthUserRepo {
+        get =>  $this->apiAuthUserRepo??= new FileApiAuthUserRepo($this->tokenStorageFile);
+    }
+    public ApiAuthUserInMemoryRepoInterface $apiAuthUserInMemoryRepo {
+        get =>  $this->apiAuthUserInMemoryRepo??= new ApiAuthUserInMemoryRepo();
     }
 
     public MusicServiceInterface $musicService {

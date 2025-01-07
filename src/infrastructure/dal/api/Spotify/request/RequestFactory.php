@@ -15,13 +15,13 @@ class RequestFactory implements PlaylistRqFactoryInterface, OauthRqFactoryInterf
 
     public function playlistsMine(User $user) : Playlist
     {
-        $auth = self::$config->authUserRepo->fetchById($user);
+        $auth = self::$config->apiAuthUserRepo->fetchById($user);
         return Playlist::mine($auth);
     }
 
     public function playlistTracks(User $user, string|int $idPlaylist) : PlaylistTracks
     {
-        $auth = self::$config->authUserRepo->fetchById($user);
+        $auth = self::$config->apiAuthUserRepo->fetchById($user);
         return new PlaylistTracks($auth, $idPlaylist);
     }
 

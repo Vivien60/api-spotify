@@ -3,6 +3,7 @@ require_once "../src/autoload.php";
 require_once "../src/utils/trace.php";
 
 use config\Config;
+use exception\RequestAuthError;
 use GuzzleHttp\Exception\RequestException;
 use service\ConfigDispatcher;
 use service\GetUserToken;
@@ -13,7 +14,7 @@ ConfigDispatcher::dispatch(Config::getInstance());
  * @TODO Vivien : gestion de l'affichage de l'erreur
  */
 const STATE_OK = 1;
-
+error_reporting(E_ALL);
 if (!empty($_GET['code']) && !empty($_GET['state']) /*&& $_GET['state'] == STATE_OK*/) {
     try {
         $service = new GetUserToken();

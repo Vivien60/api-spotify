@@ -3,7 +3,7 @@
 namespace infrastructure\dal\api\musicService\Spotify;
 
 use service\contracts\ConfigInterface;
-use exception\AuthError;
+use exception\RequestAuthError;
 use infrastructure\dal\api\ClientAbstract;
 use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
 use infrastructure\dal\api\contracts\internal\WithBearerTokenInterface;
@@ -62,7 +62,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
 
     /**
      * @throws Throwable
-     * @throws AuthError
+     * @throws RequestAuthError
      */
     public function tokenFromCode(string $code): TokenItem
     {
@@ -72,7 +72,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         if($token?->access_token) {
             return new TokenItem($token, $token->access_token, $token->refresh_token, true);
         } else {
-            throw new \exception\AuthError("There was an error while sending token request");
+            throw new \exception\RequestAuthError("There was an error while sending token request");
         }
     }
     private function handleRequestWithRefresh(
@@ -81,7 +81,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
     ): ResponseInterface {
         try {
             return $this->handleRequest($request);
-        } catch (AuthError $e) {
+        } catch (RequestAuthError $e) {
             return $this->refreshTokenThenRetry($request, $user, __METHOD__);
         }
     }
@@ -118,7 +118,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
             $response = $this->handleOAuthRequest($refreshRequest);
             return $this->saveNewTokenFromResponse($response, $user, $request->token);
         }
-        throw new \exception\AuthError("There was an error while refreshing token");
+        throw new \exception\RequestAuthError("There was an error while refreshing token");
     }
 
     protected function handleOAuthRequest(EndpointRequestInterface $request): ResponseInterface
@@ -132,10 +132,10 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         if ($token?->access_token) {
             $oldToken->accessToken = $token->access_token;
             $newToken = new TokenItem($token, $oldToken->accessToken, $oldToken->refreshToken, true);
-            self::$config->authUserRepo->add($newToken);
+            self::$config->apiAuthUserRepo->add($newToken);
             return $newToken;
         }
-        throw new \exception\AuthError("There was an error while refreshing token");
+        throw new \exception\RequestAuthError("There was an error while refreshing token");
     }
 
     public function parseResponse(ResponseInterface $response): ?StdClass
