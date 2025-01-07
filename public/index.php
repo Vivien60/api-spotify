@@ -1,7 +1,6 @@
 <?php
 require_once "../src/autoload.php";
 session_start();
-var_dump($_SESSION);
 /**@TODO Vivien: http error mapper api. Exemple :
  *      class ServiceAErrorMapper {
  *          public static function mapError($response) {
@@ -25,12 +24,16 @@ var_dump($_SESSION);
  */
 
 /**@TODO Vivien: Amélioration de la gestion des sessions et des tokens :
- *      Vérification de la validité des tokens avant chaque utilisation
- *      et implémentation d'un mécanisme de rafraîchissement automatique des tokens expirés.
+ *      implémentation d'un mécanisme de rafraîchissement automatique des tokens expirés. => done
  */
 
 /** @TODO Vivien:
- *      Lyrics.ovh fait un timeout quand on l'interroge
+ *      Lyrics.ovh fait un timeout quand on l'interroge avec des résultats qui ne donnent rien
+ */
+
+
+/** @TODO Vivien:
+ *      Il faudra faire en sorte qu'un utilisateur puisse être associé à plusieurs authentifications externes
  */
 
 ?>
