@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace view\layouts;
 
@@ -51,8 +52,6 @@ abstract class Layout
         </footer>
         </body>
         </html>
-        <?php
         HTML;
     }
-
 }

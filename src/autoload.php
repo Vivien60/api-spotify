@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 function autoload_apiSpotify_1247575(string $nomClasse) : void {
     $srcClass = implode(DIRECTORY_SEPARATOR, [
         dirname(__DIR__),

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace infrastructure\dal\api\musicService\Spotify;
 
@@ -68,7 +69,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
     {
         $request = $this->requestFactory->tokenFromCode($this->appAuth, self::$config->REDIRECT_URI, $code);
         $response = $this->clientOAuth->sendRequest($request);
-        $token = json_decode($response->getBody());
+        $token = json_decode($response->getBody()->getContents());
         if($token?->access_token) {
             return new TokenItem($token, $token->access_token, $token->refresh_token, true);
         } else {
@@ -128,7 +129,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
 
     public function saveNewTokenFromResponse(ResponseInterface $response, User $user, TokenItem $oldToken): TokenItem
     {
-        $token = json_decode($response->getBody());
+        $token = json_decode($response->getBody()->getContents());
         if ($token?->access_token) {
             $oldToken->accessToken = $token->access_token;
             $newToken = new TokenItem($token, $oldToken->accessToken, $oldToken->refreshToken, true);

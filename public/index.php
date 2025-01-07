@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 require_once "../src/autoload.php";
 session_start();
 /**@TODO Vivien: http error mapper api. Exemple :

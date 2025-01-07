@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 require_once dirname(__FILE__,2) . "/src/autoload.php";
 require_once dirname(__FILE__,2).DIRECTORY_SEPARATOR."src".DIRECTORY_SEPARATOR."utils".DIRECTORY_SEPARATOR."trace.php";
 

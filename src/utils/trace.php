@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
@@ -27,7 +28,7 @@ function traceRequestException(RequestException|Exception $e, string $message): 
 function traceException(Throwable|Exception $e, string $message): void
 {
     trace($message);
-    trace($e->getMessage() . ': ' . print_r($e->getTrace(), 1));
+    trace($e->getMessage() . ': ' . print_r($e->getTrace(), true));
     if($e->getPrevious() instanceof RequestException) {
         traceRequestException($e->getPrevious(), $e->getPrevious()->getMessage());
     }

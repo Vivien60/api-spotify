@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace infrastructure\dal\api\musicService\LyricsOvh;
 
 use infrastructure\dal\api\ClientAbstract;
@@ -27,7 +28,7 @@ class LyricsOvh implements SongServiceInterface
 
     protected function parseResponse(ResponseInterface $response): ?StdClass
     {
-        return json_decode($response->getBody());
+        return json_decode($response->getBody()->getContents());
     }
 
     protected function parseSongItem(StdClass $item): string
