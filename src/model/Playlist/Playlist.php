@@ -58,7 +58,7 @@ class Playlist
             'name' => $this->title,
             'url' => $this->url,
             'image' => $this->imageUrl,
-            'songs' => array_map([Song::class, 'fromArray'], $this->songs)
+            'songs' => array_map([Song::class, 'toArray'], $this->songs)
         ];
     }
 
