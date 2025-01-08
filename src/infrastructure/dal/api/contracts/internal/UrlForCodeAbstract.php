@@ -11,8 +11,11 @@ class UrlForCodeAbstract
 {
     public const string SCOPE = '';
 
+    public array $urlParams = [];
+
     public function __construct(private ClientForToken $client, private mixed $clientId, private string $redirectUri)
     {
+        $this->buildCodeRequestParams();
     }
     /**
      * Magic method {@see https://www.php.net/manual/en/language.oop5.magic.php#object.tostring}
@@ -28,23 +31,21 @@ class UrlForCodeAbstract
 
     public function url(): string
     {
-        $query = $this->buildCodeRequestParams();
-        return $this->buildCodeRequestUrl($query);
+        return $this->buildCodeRequestUrl($this->urlParams);
     }
 
     /**
-     * @return mixed[]
      * @throws RandomException
      */
-    public function buildCodeRequestParams(): array
+    public function buildCodeRequestParams(): void
     {
-        return array(
+        $this->urlParams = [
             'response_type' => 'code',
             'client_id' => $this->clientId,
             'scope' => $this->client->getScope(),
             'redirect_uri' => $this->redirectUri,
             'state' => bin2hex(random_bytes(5)), //@TODO Vivien : mettre le state en session
-        );
+        ];
     }
 
     /**

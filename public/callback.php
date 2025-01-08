@@ -15,8 +15,12 @@ const STATE_OK = 1;
 error_reporting(E_ALL);
 if (!empty($_GET['code']) && !empty($_GET['state']) /*&& $_GET['state'] == STATE_OK*/) {
     try {
-        $service = new GetUserToken();
-        $token = $service->createUserToken(htmlentities($_GET['code']));
+        $service = new \service\OAuthService();
+        $service->createUserToken(
+            htmlentities($_GET['code']),
+            ['state' => htmlentities($_GET['state'])],
+            Config::getInstance()->playlistService,
+        );
     } catch (RequestException $e) {
         /**
          * @TODO Vivien :

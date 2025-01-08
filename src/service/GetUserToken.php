@@ -19,10 +19,4 @@ class GetUserToken
         self::$config->apiAuthUserInMemoryRepo->add($token, $me);
         return $token;
     }
-
-    private function getCurrentUser(): ?User
-    {
-        $userRepo = self::$config->userRepo;
-        return $userRepo->findCurrentUser();
-    }
 }
