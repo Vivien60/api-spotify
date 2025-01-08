@@ -11,9 +11,6 @@ use service\GetUserToken;
 
 session_start();
 ConfigDispatcher::dispatch(Config::getInstance());
-/**
- * @TODO Vivien : gestion de l'affichage de l'erreur
- */
 const STATE_OK = 1;
 error_reporting(E_ALL);
 if (!empty($_GET['code']) && !empty($_GET['state']) /*&& $_GET['state'] == STATE_OK*/) {
