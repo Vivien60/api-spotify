@@ -19,20 +19,6 @@ session_start();
  *      }
  */
 
-/**@TODO Vivien: Externalisation de la configuration :
- *      Externalisation de la configuration dans des fichiers JSON, YAML ou une base de données
- *      pour faciliter la gestion et les modifications des paramètres sans toucher au code.
- */
-
-/**@TODO Vivien: Amélioration de la gestion des sessions et des tokens :
- *      implémentation d'un mécanisme de rafraîchissement automatique des tokens expirés. => done
- */
-
-/** @TODO Vivien:
- *      Lyrics.ovh fait un timeout quand on l'interroge avec des résultats qui ne donnent rien
- */
-
-
 /** @TODO Vivien:
  *      Il faudra faire en sorte qu'un utilisateur puisse être associé à plusieurs authentifications externes
  */

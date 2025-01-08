@@ -20,7 +20,6 @@ class HeaderINPROGRESS extends Template
 
     public function mainContent(): string
     {
-        // TODO Vivien: Implement mainContent() method.
         return '';
     }
 }
