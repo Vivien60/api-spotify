@@ -19,12 +19,18 @@ class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
         parent::__construct();
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function findById(int|string $id, User $user): ?PlaylistItem
     {
         $songs = $this->musicService->tracksFromUserPlaylist($user, $id);
         return $this->hydrateItem(["id" => $id, "songs" => $songs]) ;
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function findByUser(User $user): ?array
     {
         $results = $this->musicService->playlistsFromUser($user);
