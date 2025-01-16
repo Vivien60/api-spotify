@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\musicService\contracts;
+namespace apispotify\infrastructure\dal\api\musicService\contracts;
 
-use infrastructure\dal\api\RequestAbstract;
-use model\Song\Song as SongItem;
+use apispotify\infrastructure\dal\api\RequestAbstract;
+use apispotify\model\Song\Song as SongItem;
 
 interface SongRqFactoryInterface
 {

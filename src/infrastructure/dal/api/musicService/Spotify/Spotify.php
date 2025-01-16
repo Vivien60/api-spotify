@@ -1,24 +1,24 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\musicService\Spotify;
+namespace apispotify\infrastructure\dal\api\musicService\Spotify;
 
-use exception\RequestAuthError;
-use infrastructure\dal\api\ClientAbstract;
-use infrastructure\dal\api\contracts\EndpointRequestInterface;
-use infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
-use infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
-use infrastructure\dal\api\musicService\contracts\PlaylistRqFactoryInterface;
-use infrastructure\dal\api\musicService\OAuthInterface;
-use infrastructure\dal\api\utils\OAuth\SecretAuth;
-use infrastructure\dal\api\utils\OAuth\UrlForCode;
-use infrastructure\dal\api\utils\OAuth\WithBearerTokenInterface;
-use infrastructure\entity\TokenItem;
-use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
-use model\User\User;
+use apispotify\exception\RequestAuthError;
+use apispotify\infrastructure\dal\api\ClientAbstract;
+use apispotify\infrastructure\dal\api\contracts\EndpointRequestInterface;
+use apispotify\infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
+use apispotify\infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
+use apispotify\infrastructure\dal\api\musicService\contracts\PlaylistRqFactoryInterface;
+use apispotify\infrastructure\dal\api\musicService\OAuthInterface;
+use apispotify\infrastructure\dal\api\utils\OAuth\SecretAuth;
+use apispotify\infrastructure\dal\api\utils\OAuth\UrlForCode;
+use apispotify\infrastructure\dal\api\utils\OAuth\WithBearerTokenInterface;
+use apispotify\infrastructure\entity\TokenItem;
+use apispotify\infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
+use apispotify\model\User\User;
 use Psr\Http\Message\ResponseInterface;
 use Random\RandomException;
-use service\contracts\ConfigInterface;
+use apispotify\service\contracts\ConfigInterface;
 use stdClass;
 use Throwable;
 
@@ -83,7 +83,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
         if($token?->access_token) {
             return new TokenItem($token, $token->access_token, $token->refresh_token, true);
         } else {
-            throw new \exception\RequestAuthError("There was an error while sending token request");
+            throw new \apispotify\exception\RequestAuthError("There was an error while sending token request");
         }
     }
 
@@ -137,7 +137,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
             $response = $this->handleOAuthRequest($refreshRequest);
             return $this->saveNewTokenFromResponse($response, $user, $request->token);
         }
-        throw new \exception\RequestAuthError("There was an error while refreshing token");
+        throw new \apispotify\exception\RequestAuthError("There was an error while refreshing token");
     }
 
     /**
@@ -160,7 +160,7 @@ class Spotify implements PlaylistServiceInterface, OAuthInterface
             self::$config->apiAuthUserRepo->add($newToken);
             return $newToken;
         }
-        throw new \exception\RequestAuthError("There was an error while refreshing token");
+        throw new \apispotify\exception\RequestAuthError("There was an error while refreshing token");
     }
 
     public function parseResponse(ResponseInterface $response): ?StdClass

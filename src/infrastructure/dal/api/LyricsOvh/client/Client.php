@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\LyricsOvh\client;
+namespace apispotify\infrastructure\dal\api\LyricsOvh\client;
 
 use Exception;
 use GuzzleHttp\Exception\RequestException;
-use infrastructure\dal\api\ClientAbstract;
+use apispotify\infrastructure\dal\api\ClientAbstract;
 use Throwable;
 
 class Client extends ClientAbstract

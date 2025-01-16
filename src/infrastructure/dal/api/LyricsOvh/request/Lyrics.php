@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\LyricsOvh\request;
+namespace apispotify\infrastructure\dal\api\LyricsOvh\request;
 
 use Exception;
-use exception\NotFoundE;
-use infrastructure\dal\api\RequestAbstract;
+use apispotify\exception\NotFoundE;
+use apispotify\infrastructure\dal\api\RequestAbstract;
 use Throwable;
 
 class Lyrics extends RequestAbstract

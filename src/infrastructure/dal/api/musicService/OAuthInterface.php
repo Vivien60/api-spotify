@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\musicService;
+namespace apispotify\infrastructure\dal\api\musicService;
 
-use infrastructure\dal\api\contracts\UrlForCodeAbstract;
-use infrastructure\entity\TokenItem;
+use apispotify\infrastructure\dal\api\contracts\UrlForCodeAbstract;
+use apispotify\infrastructure\entity\TokenItem;
 
 interface OAuthInterface
 {

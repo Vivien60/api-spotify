@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\musicService\contracts;
+namespace apispotify\infrastructure\dal\api\musicService\contracts;
 
 interface ClientForTokenInterface
 {

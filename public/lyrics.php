@@ -4,10 +4,10 @@ require_once "../src/autoload.php";
 require_once "../config/Config.php";
 
 use config\Config;
-use exception\NotFoundE;
-use model\Song\Song;
-use service\ConfigDispatcher;
-use view\layouts\ConnectedLayout;
+use apispotify\exception\NotFoundE;
+use apispotify\model\Song\Song;
+use apispotify\service\ConfigDispatcher;
+use apispotify\view\layouts\ConnectedLayout;
 
 session_start();
 ConfigDispatcher::dispatch(Config::getInstance());
@@ -23,5 +23,5 @@ try {
     $song->lyrics = "No lyrics found for this song.";
 }
 
-$view = new view\templates\Lyrics(new ConnectedLayout(), $song);
+$view = new apispotify\view\templates\Lyrics(new ConnectedLayout(), $song);
 echo $view->render();

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace view\templates;
+namespace apispotify\view\templates;
 
-use view\layouts\Layout;
-use view\templates\components\Component;
+use apispotify\view\layouts\Layout;
+use apispotify\view\templates\components\Component;
 
 class Playlist extends Template
 {

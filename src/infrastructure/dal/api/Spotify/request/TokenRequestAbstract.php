@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\Spotify\request;
+namespace apispotify\infrastructure\dal\api\Spotify\request;
 
-use infrastructure\dal\api\utils\OAuth\RequestWithSecretAuthAbstract;
-use infrastructure\dal\api\utils\OAuth\SecretAuth;
+use apispotify\infrastructure\dal\api\utils\OAuth\RequestWithSecretAuthAbstract;
+use apispotify\infrastructure\dal\api\utils\OAuth\SecretAuth;
 
 abstract class TokenRequestAbstract extends RequestWithSecretAuthAbstract
 {

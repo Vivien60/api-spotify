@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace service;
+namespace apispotify\service;
 
-use infrastructure\dal\api\Spotify\request\RequestFactory;
-use model\User\Singer;
-use service\contracts\ConfigInterface;
-use infrastructure\dal\api\musicService\Spotify\Spotify;
-use infrastructure\repository\playlist\PlaylistApiRepo;
-use infrastructure\repository\song\SongApiRepo;
-use model\User\User;
+use apispotify\infrastructure\dal\api\Spotify\request\RequestFactory;
+use apispotify\model\User\Singer;
+use apispotify\service\contracts\ConfigInterface;
+use apispotify\infrastructure\dal\api\musicService\Spotify\Spotify;
+use apispotify\infrastructure\repository\playlist\PlaylistApiRepo;
+use apispotify\infrastructure\repository\song\SongApiRepo;
+use apispotify\model\User\User;
 
 class ConfigDispatcher
 {

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\repository\user;
+namespace apispotify\infrastructure\repository\user;
 
-use model\User\User;
-use model\User\UserRepoInterface;
+use apispotify\model\User\User;
+use apispotify\model\User\UserRepoInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class UserRepo implements UserRepoInterface

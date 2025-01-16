@@ -6,15 +6,15 @@ require_once "../src/utils/trace.php";
 
 use config\Config;
 use GuzzleHttp\Exception\RequestException;
-use service\ConfigDispatcher;
-use service\GetUserPlaylists;
-use view\layouts\ConnectedLayout;
-use view\templates\components\Mosaic;
-use view\templates\Playlists;
+use apispotify\service\ConfigDispatcher;
+use apispotify\service\GetUserPlaylists;
+use apispotify\view\layouts\ConnectedLayout;
+use apispotify\view\templates\components\Mosaic;
+use apispotify\view\templates\Playlists;
 session_start();
 ConfigDispatcher::dispatch(Config::getInstance());
 
-$serviceAuth = new \service\AuthenticatorService();
+$serviceAuth = new apispotify\service\AuthenticatorService();
 $serviceAuth->authenticate();
 try {
     $getPlaylists = new GetUserPlaylists();

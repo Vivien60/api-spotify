@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\utils\OAuth;
+namespace apispotify\infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\contracts\UrlForCodeAbstract;
-use infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
+use apispotify\infrastructure\dal\api\contracts\UrlForCodeAbstract;
+use apispotify\infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
 
 class UrlForCode extends UrlForCodeAbstract
 {

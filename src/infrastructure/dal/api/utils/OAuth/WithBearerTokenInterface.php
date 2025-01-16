@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\utils\OAuth;
+namespace apispotify\infrastructure\dal\api\utils\OAuth;
 
 interface WithBearerTokenInterface extends WithTokenInterface
 {

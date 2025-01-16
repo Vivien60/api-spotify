@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace view\templates;
+namespace apispotify\view\templates;
 
-use model\Song\Song as SongItem;
-use view\layouts\Layout;
+use apispotify\model\Song\Song as SongItem;
+use apispotify\view\layouts\Layout;
 
 class Lyrics extends Template
 {

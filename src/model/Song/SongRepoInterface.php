@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace model\Song;
+namespace apispotify\model\Song;
 
-use model\Song\Song as SongItem;
+use apispotify\model\Song\Song as SongItem;
 
 interface SongRepoInterface
 {

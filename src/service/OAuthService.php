@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace service;
+namespace apispotify\service;
 
-use exception\RequestAuthError;
-use infrastructure\dal\api\contracts\UrlForCodeAbstract;
-use infrastructure\dal\api\musicService\OAuthInterface;
-use infrastructure\entity\TokenItem;
-use model\User\User;
-use service\contracts\ConfigInterface;
+use apispotify\exception\RequestAuthError;
+use apispotify\infrastructure\dal\api\contracts\UrlForCodeAbstract;
+use apispotify\infrastructure\dal\api\musicService\OAuthInterface;
+use apispotify\infrastructure\entity\TokenItem;
+use apispotify\model\User\User;
+use apispotify\service\contracts\ConfigInterface;
 
 class OAuthService
 {

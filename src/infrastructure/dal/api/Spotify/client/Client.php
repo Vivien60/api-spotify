@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\Spotify\client;
+namespace apispotify\infrastructure\dal\api\Spotify\client;
 
 use GuzzleHttp\Exception\RequestException;
-use infrastructure\dal\api\ClientAbstract;
-use infrastructure\dal\api\Spotify\request\RequestFactory;
+use apispotify\infrastructure\dal\api\ClientAbstract;
+use apispotify\infrastructure\dal\api\Spotify\request\RequestFactory;
 use Throwable;
 
 class Client extends ClientAbstract

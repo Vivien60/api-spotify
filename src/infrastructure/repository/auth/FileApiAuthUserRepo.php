@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\repository\auth;
+namespace apispotify\infrastructure\repository\auth;
 
-use contracts\ApiAuthUserRepoInterface;
-use infrastructure\entity\TokenItem;
-use model\User\User;
+use apispotify\contracts\ApiAuthUserRepoInterface;
+use apispotify\infrastructure\entity\TokenItem;
+use apispotify\model\User\User;
 
 class FileApiAuthUserRepo implements ApiAuthUserRepoInterface
 {

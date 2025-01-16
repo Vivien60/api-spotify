@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
-namespace infrastructure\repository\song;
+namespace apispotify\infrastructure\repository\song;
 
-use infrastructure\repository\ApiRepoAbstract;
-use infrastructure\repository\song\contracts\SongServiceInterface;
-use model\Song\Song as SongItem;
-use model\Song\SongRepoInterface;
-use service\contracts\ConfigInterface;
+use apispotify\infrastructure\repository\ApiRepoAbstract;
+use apispotify\infrastructure\repository\song\contracts\SongServiceInterface;
+use apispotify\model\Song\Song as SongItem;
+use apispotify\model\Song\SongRepoInterface;
+use apispotify\service\contracts\ConfigInterface;
 
 class SongApiRepo extends ApiRepoAbstract implements SongRepoInterface
 {

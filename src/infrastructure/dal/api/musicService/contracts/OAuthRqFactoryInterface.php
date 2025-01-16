@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\musicService\contracts;
+namespace apispotify\infrastructure\dal\api\musicService\contracts;
 
 
-use infrastructure\dal\api\RequestAbstract;
-use infrastructure\dal\api\utils\OAuth\SecretAuth;
-use infrastructure\dal\api\utils\OAuth\WithSecretAuthInterface;
-use infrastructure\entity\TokenItem;
+use apispotify\infrastructure\dal\api\RequestAbstract;
+use apispotify\infrastructure\dal\api\utils\OAuth\SecretAuth;
+use apispotify\infrastructure\dal\api\utils\OAuth\WithSecretAuthInterface;
+use apispotify\infrastructure\entity\TokenItem;
 
 interface OAuthRqFactoryInterface
 {

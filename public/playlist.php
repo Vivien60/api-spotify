@@ -4,19 +4,19 @@ require_once dirname(__FILE__,2) . "/src/autoload.php";
 require_once dirname(__FILE__,2).DIRECTORY_SEPARATOR."src".DIRECTORY_SEPARATOR."utils".DIRECTORY_SEPARATOR."trace.php";
 
 use config\Config;
-use service\ConfigDispatcher;
-use exception\NotFoundE;
-use view\layouts\ConnectedLayout;
-use view\templates\components\Mosaic;
-use view\templates\Playlist;
+use apispotify\service\ConfigDispatcher;
+use apispotify\exception\NotFoundE;
+use apispotify\view\layouts\ConnectedLayout;
+use apispotify\view\templates\components\Mosaic;
+use apispotify\view\templates\Playlist;
 
 session_start();
 ConfigDispatcher::dispatch(Config::getInstance());
 
-$serviceAuth = new \service\AuthenticatorService();
+$serviceAuth = new apispotify\service\AuthenticatorService();
 $serviceAuth->authenticate();
 
-$service = new \service\GetUserPlaylists();
+$service = new apispotify\service\GetUserPlaylists();
 try {
     $myPlaylist = $service->byPlaylistIdForCurrentUser(htmlentities($_GET["item"]));
     $view = new Playlist(new ConnectedLayout(), new Mosaic($myPlaylist->songs));

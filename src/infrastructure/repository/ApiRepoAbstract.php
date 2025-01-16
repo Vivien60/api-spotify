@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\repository;
+namespace apispotify\infrastructure\repository;
 
-use infrastructure\dal\api\ClientAbstract;
-use infrastructure\repository\contracts\MusicServiceInterface;
+use apispotify\infrastructure\dal\api\ClientAbstract;
+use apispotify\infrastructure\repository\contracts\MusicServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
 

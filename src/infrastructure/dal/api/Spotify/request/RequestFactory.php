@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\Spotify\request;
+namespace apispotify\infrastructure\dal\api\Spotify\request;
 
-use infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
-use infrastructure\dal\api\musicService\contracts\PlaylistRqFactoryInterface;
-use infrastructure\dal\api\utils\OAuth\SecretAuth;
-use infrastructure\entity\TokenItem;
-use model\User\User;
-use service\contracts\ConfigInterface;
+use apispotify\infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
+use apispotify\infrastructure\dal\api\musicService\contracts\PlaylistRqFactoryInterface;
+use apispotify\infrastructure\dal\api\utils\OAuth\SecretAuth;
+use apispotify\infrastructure\entity\TokenItem;
+use apispotify\model\User\User;
+use apispotify\service\contracts\ConfigInterface;
 
 class RequestFactory implements PlaylistRqFactoryInterface, OauthRqFactoryInterface
 {

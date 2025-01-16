@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\musicService;
+namespace apispotify\infrastructure\dal\api\musicService;
 
-use infrastructure\dal\api\musicService\LyricsOvh\LyricsOvh;
-use infrastructure\dal\api\LyricsOvh\client\Client as LyricsOvhCli;
-use infrastructure\dal\api\LyricsOvh\request\RequestFactory as LyricsOvhRequests;
-use infrastructure\dal\api\Spotify\client\Client as SpotifyCli;
-use infrastructure\dal\api\Spotify\client\ClientForToken;
-use infrastructure\dal\api\Spotify\request\RequestFactory as SpotifyRequests;
-use infrastructure\dal\api\musicService\Spotify\Spotify;
-use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
-use infrastructure\repository\song\contracts\SongServiceInterface;
+use apispotify\infrastructure\dal\api\musicService\LyricsOvh\LyricsOvh;
+use apispotify\infrastructure\dal\api\LyricsOvh\client\Client as LyricsOvhCli;
+use apispotify\infrastructure\dal\api\LyricsOvh\request\RequestFactory as LyricsOvhRequests;
+use apispotify\infrastructure\dal\api\Spotify\client\Client as SpotifyCli;
+use apispotify\infrastructure\dal\api\Spotify\client\ClientForToken;
+use apispotify\infrastructure\dal\api\Spotify\request\RequestFactory as SpotifyRequests;
+use apispotify\infrastructure\dal\api\musicService\Spotify\Spotify;
+use apispotify\infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
+use apispotify\infrastructure\repository\song\contracts\SongServiceInterface;
 
 class MusicServiceFactory
 {

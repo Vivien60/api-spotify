@@ -5,7 +5,7 @@ require_once "../src/utils/trace.php";
 
 use config\Config;
 use GuzzleHttp\Exception\RequestException;
-use service\ConfigDispatcher;
+use apispotify\service\ConfigDispatcher;
 
 session_start();
 ConfigDispatcher::dispatch(Config::getInstance());

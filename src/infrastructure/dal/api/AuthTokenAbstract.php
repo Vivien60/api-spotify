@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api;
+namespace apispotify\infrastructure\dal\api;
 
-use infrastructure\dal\api\utils\OAuth\AuthTokenInterface;
-use infrastructure\entity\TokenItem;
+use apispotify\infrastructure\dal\api\utils\OAuth\AuthTokenInterface;
+use apispotify\infrastructure\entity\TokenItem;
 
 abstract class AuthTokenAbstract implements AuthTokenInterface, \Stringable
 {

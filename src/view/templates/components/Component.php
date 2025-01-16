@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace view\templates\components;
+namespace apispotify\view\templates\components;
 
 abstract class Component
 {

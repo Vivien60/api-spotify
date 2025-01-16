@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\utils\OAuth;
+namespace apispotify\infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\contracts\EndpointRequestInterface;
-use infrastructure\dal\api\RequestAbstract;
-use infrastructure\entity\TokenItem;
+use apispotify\infrastructure\dal\api\contracts\EndpointRequestInterface;
+use apispotify\infrastructure\dal\api\RequestAbstract;
+use apispotify\infrastructure\entity\TokenItem;
 
 abstract class RequestWithBearerTokenAbstract extends RequestAbstract implements WithBearerTokenInterface, EndpointRequestInterface
 {

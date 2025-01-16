@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace model\Playlist;
+namespace apispotify\model\Playlist;
 
-use model\Song\Song;
+use apispotify\model\Song\Song;
 
 class Playlist
 {

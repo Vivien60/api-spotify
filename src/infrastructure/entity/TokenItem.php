@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\entity;
+namespace apispotify\infrastructure\entity;
 
 use JsonSerializable;
 use stdClass;

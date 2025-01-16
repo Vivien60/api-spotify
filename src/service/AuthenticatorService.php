@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace service;
+namespace apispotify\service;
 
-use service\contracts\ConfigInterface;
+use apispotify\service\contracts\ConfigInterface;
 
 class AuthenticatorService
 {

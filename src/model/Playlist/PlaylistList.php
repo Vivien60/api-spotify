@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace model\Playlist;
+namespace apispotify\model\Playlist;
 
 class PlaylistList
 {

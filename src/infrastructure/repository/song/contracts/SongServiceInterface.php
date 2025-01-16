@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\repository\song\contracts;
+namespace apispotify\infrastructure\repository\song\contracts;
 
-use infrastructure\repository\contracts\MusicServiceInterface;
-use model\Song\Song as SongItem;
+use apispotify\infrastructure\repository\contracts\MusicServiceInterface;
+use apispotify\model\Song\Song as SongItem;
 
 interface SongServiceInterface extends MusicServiceInterface
 {

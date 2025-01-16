@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\utils\OAuth;
+namespace apispotify\infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\AuthTokenAbstract;
-use infrastructure\entity\TokenItem;
+use apispotify\infrastructure\dal\api\AuthTokenAbstract;
+use apispotify\infrastructure\entity\TokenItem;
 
 class BearerToken extends AuthTokenAbstract
 {

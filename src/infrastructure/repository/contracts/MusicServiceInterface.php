@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\repository\contracts;
+namespace apispotify\infrastructure\repository\contracts;
 
 interface MusicServiceInterface
 {

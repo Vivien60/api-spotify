@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\musicService\contracts;
+namespace apispotify\infrastructure\dal\api\musicService\contracts;
 
-use infrastructure\dal\api\contracts\EndpointRequestInterface;
-use model\User\User;
+use apispotify\infrastructure\dal\api\contracts\EndpointRequestInterface;
+use apispotify\model\User\User;
 
 interface PlaylistRqFactoryInterface
 {

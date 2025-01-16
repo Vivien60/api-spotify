@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace model\User;
+namespace apispotify\model\User;
 
-use service\contracts\ConfigInterface;
+use apispotify\service\contracts\ConfigInterface;
 
 class User
 {

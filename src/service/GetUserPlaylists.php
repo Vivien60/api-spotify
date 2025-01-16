@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
-namespace service;
+namespace apispotify\service;
 
-use model\Playlist\Playlist;
-use model\Playlist\PlaylistRepoInterface;
-use model\User\User;
-use model\User\UserRepoInterface;
-use service\contracts\ConfigInterface;
+use apispotify\model\Playlist\Playlist;
+use apispotify\model\Playlist\PlaylistRepoInterface;
+use apispotify\model\User\User;
+use apispotify\model\User\UserRepoInterface;
+use apispotify\service\contracts\ConfigInterface;
 
 class GetUserPlaylists
 {

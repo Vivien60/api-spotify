@@ -2,21 +2,21 @@
 declare(strict_types=1);
 namespace config;
 
-use contracts\ApiAuthUserInMemoryRepoInterface;
-use contracts\ApiAuthUserRepoInterface;
-use infrastructure\dal\api\musicService\MusicServiceFactory;
-use infrastructure\dal\api\musicService\OAuthInterface;
-use infrastructure\repository\auth\ApiAuthUserInMemoryRepo;
-use infrastructure\repository\auth\FileApiAuthUserRepo;
-use infrastructure\repository\contracts\MusicServiceInterface;
-use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
-use infrastructure\repository\playlist\PlaylistApiRepo;
-use infrastructure\repository\song\contracts\SongServiceInterface;
-use infrastructure\repository\song\SongApiRepo;
-use infrastructure\repository\user\UserRepo;
-use model\Playlist\PlaylistRepoInterface;
-use model\Song\SongRepoInterface;
-use service\contracts\ConfigInterface;
+use apispotify\contracts\ApiAuthUserInMemoryRepoInterface;
+use apispotify\contracts\ApiAuthUserRepoInterface;
+use apispotify\infrastructure\dal\api\musicService\MusicServiceFactory;
+use apispotify\infrastructure\dal\api\musicService\OAuthInterface;
+use apispotify\infrastructure\repository\auth\ApiAuthUserInMemoryRepo;
+use apispotify\infrastructure\repository\auth\FileApiAuthUserRepo;
+use apispotify\infrastructure\repository\contracts\MusicServiceInterface;
+use apispotify\infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
+use apispotify\infrastructure\repository\playlist\PlaylistApiRepo;
+use apispotify\infrastructure\repository\song\contracts\SongServiceInterface;
+use apispotify\infrastructure\repository\song\SongApiRepo;
+use apispotify\infrastructure\repository\user\UserRepo;
+use apispotify\model\Playlist\PlaylistRepoInterface;
+use apispotify\model\Song\SongRepoInterface;
+use apispotify\service\contracts\ConfigInterface;
 
 define('TOKEN_STORAGE_FILE', dirname(__FILE__,2).DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'token.json');
 

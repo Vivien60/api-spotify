@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace view\layouts;
+namespace apispotify\view\layouts;
 
 class ConnectedLayout extends Layout
 {

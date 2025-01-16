@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\Spotify\request;
+namespace apispotify\infrastructure\dal\api\Spotify\request;
 
 use Exception;
-use exception\NotFoundE;
-use infrastructure\dal\api\utils\OAuth\RequestWithBearerTokenAbstract;
-use infrastructure\entity\TokenItem;
+use apispotify\exception\NotFoundE;
+use apispotify\infrastructure\dal\api\utils\OAuth\RequestWithBearerTokenAbstract;
+use apispotify\infrastructure\entity\TokenItem;
 use Throwable;
 
 class PlaylistTracks extends RequestWithBearerTokenAbstract

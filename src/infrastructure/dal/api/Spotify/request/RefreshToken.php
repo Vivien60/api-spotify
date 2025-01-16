@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\Spotify\request;
+namespace apispotify\infrastructure\dal\api\Spotify\request;
 
 use Exception;
-use exception\RequestAuthError;
-use infrastructure\dal\api\utils\OAuth\SecretAuth;
-use \infrastructure\dal\api\utils\OAuth\RefreshToken as OAuthRefreshToken;
-use infrastructure\entity\TokenItem;
+use apispotify\exception\RequestAuthError;
+use apispotify\infrastructure\dal\api\utils\OAuth\SecretAuth;
+use apispotify\infrastructure\dal\api\utils\OAuth\RefreshToken as OAuthRefreshToken;
+use apispotify\infrastructure\entity\TokenItem;
 use Throwable;
 
 class RefreshToken extends TokenRequestAbstract

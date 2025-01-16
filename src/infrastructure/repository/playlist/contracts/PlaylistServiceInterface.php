@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\repository\playlist\contracts;
+namespace apispotify\infrastructure\repository\playlist\contracts;
 
-use infrastructure\repository\contracts\MusicServiceInterface;
-use model\User\User;
+use apispotify\infrastructure\repository\contracts\MusicServiceInterface;
+use apispotify\model\User\User;
 use stdClass;
 
 interface PlaylistServiceInterface extends MusicServiceInterface

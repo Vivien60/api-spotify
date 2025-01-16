@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api;
+namespace apispotify\infrastructure\dal\api;
 
-use exception\RequestAuthError;
+use apispotify\exception\RequestAuthError;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
-use infrastructure\dal\api\contracts\EndpointRequestInterface;
-use infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
+use apispotify\infrastructure\dal\api\contracts\EndpointRequestInterface;
+use apispotify\infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 

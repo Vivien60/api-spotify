@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api;
+namespace apispotify\infrastructure\dal\api;
 
-use infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
-use infrastructure\dal\api\LyricsOvh\client\Client as LyricsOvhClient;
-use infrastructure\dal\api\Spotify\client\Client as SpotifyClient;
-use infrastructure\dal\api\Spotify\client\ClientForToken;
+use apispotify\infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
+use apispotify\infrastructure\dal\api\LyricsOvh\client\Client as LyricsOvhClient;
+use apispotify\infrastructure\dal\api\Spotify\client\Client as SpotifyClient;
+use apispotify\infrastructure\dal\api\Spotify\client\ClientForToken;
 
 class ClientFactory
 {

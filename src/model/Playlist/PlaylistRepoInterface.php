@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace model\Playlist;
+namespace apispotify\model\Playlist;
 
-use model\Playlist\Playlist as PlaylistItem;
-use model\User\User;
+use apispotify\model\Playlist\Playlist as PlaylistItem;
+use apispotify\model\User\User;
 
 interface PlaylistRepoInterface
 {

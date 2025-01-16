@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\LyricsOvh\request;
+namespace apispotify\infrastructure\dal\api\LyricsOvh\request;
 
-use infrastructure\dal\api\musicService\contracts\SongRqFactoryInterface;
-use infrastructure\dal\api\RequestAbstract;
-use model\Song\Song as SongItem;
+use apispotify\infrastructure\dal\api\musicService\contracts\SongRqFactoryInterface;
+use apispotify\infrastructure\dal\api\RequestAbstract;
+use apispotify\model\Song\Song as SongItem;
 
 class RequestFactory implements SongRqFactoryInterface
 {

@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace service\contracts;
+namespace apispotify\service\contracts;
 
-use contracts\ApiAuthUserInMemoryRepoInterface;
-use contracts\ApiAuthUserRepoInterface;
-use infrastructure\dal\api\musicService\OAuthInterface;
-use infrastructure\repository\contracts\MusicServiceInterface;
-use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
-use infrastructure\repository\song\contracts\SongServiceInterface;
-use model\Playlist\PlaylistRepoInterface;
-use model\Song\SongRepoInterface;
-use model\User\UserRepoInterface;
+use apispotify\contracts\ApiAuthUserInMemoryRepoInterface;
+use apispotify\contracts\ApiAuthUserRepoInterface;
+use apispotify\infrastructure\dal\api\musicService\OAuthInterface;
+use apispotify\infrastructure\repository\contracts\MusicServiceInterface;
+use apispotify\infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
+use apispotify\infrastructure\repository\song\contracts\SongServiceInterface;
+use apispotify\model\Playlist\PlaylistRepoInterface;
+use apispotify\model\Song\SongRepoInterface;
+use apispotify\model\User\UserRepoInterface;
 
 interface ConfigInterface
 {

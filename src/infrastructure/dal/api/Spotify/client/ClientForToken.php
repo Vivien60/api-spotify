@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\Spotify\client;
+namespace apispotify\infrastructure\dal\api\Spotify\client;
 
-use infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
+use apispotify\infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
 
 class ClientForToken extends Client implements ClientForTokenInterface
 {

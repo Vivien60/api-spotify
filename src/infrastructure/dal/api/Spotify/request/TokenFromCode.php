@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\Spotify\request;
+namespace apispotify\infrastructure\dal\api\Spotify\request;
 
-use exception\NotFoundE;
-use infrastructure\dal\api\utils\OAuth\SecretAuth;
+use apispotify\exception\NotFoundE;
+use apispotify\infrastructure\dal\api\utils\OAuth\SecretAuth;
 use Throwable;
 
 class TokenFromCode extends TokenRequestAbstract

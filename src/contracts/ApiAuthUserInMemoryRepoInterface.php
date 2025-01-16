@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace contracts;
+namespace apispotify\contracts;
 
-use infrastructure\entity\TokenItem;
-use model\User\User;
+use apispotify\infrastructure\entity\TokenItem;
+use apispotify\model\User\User;
 
 interface ApiAuthUserInMemoryRepoInterface
 {
