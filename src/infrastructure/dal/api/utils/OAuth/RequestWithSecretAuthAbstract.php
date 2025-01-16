@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\contracts\internal\WithSecretAuthInterface;
 use infrastructure\dal\api\RequestAbstract;
 
 abstract class RequestWithSecretAuthAbstract extends RequestAbstract implements WithSecretAuthInterface

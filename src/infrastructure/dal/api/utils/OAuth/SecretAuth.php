@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\contracts\internal\AuthTypeInterface;
-
 class SecretAuth implements AuthTypeInterface
 {
     public mixed $clientId;

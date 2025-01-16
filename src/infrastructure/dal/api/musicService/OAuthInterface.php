@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace infrastructure\dal\api\musicService;
 
-use infrastructure\dal\api\contracts\internal\UrlForCodeAbstract;
+use infrastructure\dal\api\contracts\UrlForCodeAbstract;
 use infrastructure\entity\TokenItem;
 
 interface OAuthInterface

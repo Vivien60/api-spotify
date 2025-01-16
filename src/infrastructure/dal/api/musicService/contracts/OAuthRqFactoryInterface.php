@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace infrastructure\dal\api\musicService\contracts;
 
 
-use infrastructure\dal\api\contracts\internal\WithSecretAuthInterface;
 use infrastructure\dal\api\RequestAbstract;
 use infrastructure\dal\api\utils\OAuth\SecretAuth;
+use infrastructure\dal\api\utils\OAuth\WithSecretAuthInterface;
 use infrastructure\entity\TokenItem;
 
 interface OAuthRqFactoryInterface

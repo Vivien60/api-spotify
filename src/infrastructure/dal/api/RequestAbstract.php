@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace infrastructure\dal\api;
 
 use Exception;
-use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
+use infrastructure\dal\api\contracts\EndpointRequestInterface;
 use Throwable;
 
 abstract class RequestAbstract implements EndpointRequestInterface

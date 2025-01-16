@@ -6,7 +6,7 @@ namespace infrastructure\dal\api;
 use exception\RequestAuthError;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
-use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
+use infrastructure\dal\api\contracts\EndpointRequestInterface;
 use infrastructure\dal\api\musicService\contracts\OAuthRqFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;

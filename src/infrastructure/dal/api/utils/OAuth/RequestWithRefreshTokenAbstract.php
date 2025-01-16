@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\contracts\internal\WithRefreshTokenInterface;
 use infrastructure\dal\api\RequestAbstract;
 use infrastructure\entity\TokenItem;
 

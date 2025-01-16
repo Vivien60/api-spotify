@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace service;
 
 use exception\RequestAuthError;
-use infrastructure\dal\api\contracts\internal\UrlForCodeAbstract;
+use infrastructure\dal\api\contracts\UrlForCodeAbstract;
 use infrastructure\dal\api\musicService\OAuthInterface;
-use service\contracts\ConfigInterface;
 use infrastructure\entity\TokenItem;
 use model\User\User;
+use service\contracts\ConfigInterface;
 
 class OAuthService
 {

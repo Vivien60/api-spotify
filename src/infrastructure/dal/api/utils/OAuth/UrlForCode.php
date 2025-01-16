@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace infrastructure\dal\api\utils\OAuth;
 
-use infrastructure\dal\api\contracts\internal\UrlForCodeAbstract;
+use infrastructure\dal\api\contracts\UrlForCodeAbstract;
 use infrastructure\dal\api\musicService\contracts\ClientForTokenInterface;
 
 class UrlForCode extends UrlForCodeAbstract

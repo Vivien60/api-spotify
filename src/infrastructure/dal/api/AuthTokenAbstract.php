@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace infrastructure\dal\api;
 
-use infrastructure\dal\api\contracts\internal\AuthTokenInterface;
+use infrastructure\dal\api\utils\OAuth\AuthTokenInterface;
 use infrastructure\entity\TokenItem;
 
 abstract class AuthTokenAbstract implements AuthTokenInterface, \Stringable

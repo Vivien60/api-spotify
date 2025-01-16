@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace infrastructure\dal\api\contracts\internal;
+namespace infrastructure\dal\api\contracts;
 
 use infrastructure\dal\api\Spotify\client\ClientForToken;
 use Random\RandomException;
