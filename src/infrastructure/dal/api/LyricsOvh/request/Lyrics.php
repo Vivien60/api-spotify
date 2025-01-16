@@ -52,7 +52,7 @@ class Lyrics extends RequestAbstract
         return $this->queryParams;
     }
 
-    public function exception(Exception|Throwable $originException) : Throwable
+    public function exception(Exception|Throwable $originException) : NotFoundE
     {
         return new NotFoundE(
             "Lyrics not found.", 0, $originException

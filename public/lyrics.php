@@ -13,8 +13,8 @@ session_start();
 ConfigDispatcher::dispatch(Config::getInstance());
 
 $song = new Song();
-$song->artist = $_GET["artist"];
-$song->title = $_GET["item"];
+$song->artist = htmlentities($_GET["artist"]);
+$song->title = htmlentities($_GET["item"]);
 
 try {
     $repo = Config::getInstance()->songRepo;
