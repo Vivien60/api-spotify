@@ -5,13 +5,13 @@ namespace service\contracts;
 
 use contracts\ApiAuthUserInMemoryRepoInterface;
 use contracts\ApiAuthUserRepoInterface;
-use contracts\PlaylistRepoInterface;
-use contracts\SongRepoInterface;
-use contracts\UserRepoInterface;
 use infrastructure\dal\api\musicService\OAuthInterface;
 use infrastructure\repository\contracts\MusicServiceInterface;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use infrastructure\repository\song\contracts\SongServiceInterface;
+use model\Playlist\PlaylistRepoInterface;
+use model\Song\SongRepoInterface;
+use model\User\UserRepoInterface;
 
 interface ConfigInterface
 {

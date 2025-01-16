@@ -4,8 +4,6 @@ namespace config;
 
 use contracts\ApiAuthUserInMemoryRepoInterface;
 use contracts\ApiAuthUserRepoInterface;
-use contracts\PlaylistRepoInterface;
-use contracts\SongRepoInterface;
 use infrastructure\dal\api\musicService\MusicServiceFactory;
 use infrastructure\dal\api\musicService\OAuthInterface;
 use infrastructure\repository\auth\ApiAuthUserInMemoryRepo;
@@ -16,6 +14,8 @@ use infrastructure\repository\playlist\PlaylistApiRepo;
 use infrastructure\repository\song\contracts\SongServiceInterface;
 use infrastructure\repository\song\SongApiRepo;
 use infrastructure\repository\user\UserRepo;
+use model\Playlist\PlaylistRepoInterface;
+use model\Song\SongRepoInterface;
 use service\contracts\ConfigInterface;
 
 define('TOKEN_STORAGE_FILE', dirname(__FILE__,2).DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'token.json');

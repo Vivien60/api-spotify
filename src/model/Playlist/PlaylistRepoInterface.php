@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace contracts;
+namespace model\Playlist;
 
 use model\Playlist\Playlist as PlaylistItem;
 use model\User\User;

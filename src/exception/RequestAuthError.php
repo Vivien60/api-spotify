@@ -4,9 +4,6 @@ declare(strict_types=1);
 namespace exception;
 
 use Exception;
-use GuzzleHttp\Exception\RequestException;
-use Psr\Http\Client\RequestExceptionInterface;
-use Psr\Http\Message\RequestInterface;
 use Throwable;
 
 class RequestAuthError extends Exception

@@ -1,14 +1,13 @@
 <?php
 declare(strict_types=1);
-declare(strict_types=1);
 namespace infrastructure\repository\playlist;
 
-use service\contracts\ConfigInterface;
-use contracts\PlaylistRepoInterface;
 use infrastructure\repository\ApiRepoAbstract;
 use infrastructure\repository\playlist\contracts\PlaylistServiceInterface;
 use model\Playlist\Playlist as PlaylistItem;
+use model\Playlist\PlaylistRepoInterface;
 use model\User\User;
+use service\contracts\ConfigInterface;
 
 class PlaylistApiRepo extends ApiRepoAbstract implements PlaylistRepoInterface
 {

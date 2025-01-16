@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
-declare(strict_types=1);
 namespace infrastructure\repository\song;
 
-use service\contracts\ConfigInterface;
-use contracts\SongRepoInterface;
 use infrastructure\repository\ApiRepoAbstract;
 use infrastructure\repository\song\contracts\SongServiceInterface;
 use model\Song\Song as SongItem;
+use model\Song\SongRepoInterface;
+use service\contracts\ConfigInterface;
 
 class SongApiRepo extends ApiRepoAbstract implements SongRepoInterface
 {

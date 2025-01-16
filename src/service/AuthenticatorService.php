@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace service;
 
 use service\contracts\ConfigInterface;
-use infrastructure\entity\TokenItem;
-use model\User\User;
 
 class AuthenticatorService
 {

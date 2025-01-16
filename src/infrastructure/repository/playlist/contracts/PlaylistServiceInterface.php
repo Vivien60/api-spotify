@@ -5,7 +5,6 @@ namespace infrastructure\repository\playlist\contracts;
 
 use infrastructure\repository\contracts\MusicServiceInterface;
 use model\User\User;
-use Psr\Http\Message\ResponseInterface;
 use stdClass;
 
 interface PlaylistServiceInterface extends MusicServiceInterface

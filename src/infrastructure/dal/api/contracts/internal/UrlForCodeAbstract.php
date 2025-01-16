@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace infrastructure\dal\api\contracts\internal;
 
-use infrastructure\dal\api\ClientAbstract;
 use infrastructure\dal\api\Spotify\client\ClientForToken;
 use Random\RandomException;
 
@@ -44,7 +43,7 @@ class UrlForCodeAbstract
             'client_id' => $this->clientId,
             'scope' => $this->client->getScope(),
             'redirect_uri' => $this->redirectUri,
-            'state' => bin2hex(random_bytes(5)), //@TODO Vivien : mettre le state en session
+            'state' => bin2hex(random_bytes(5)),
         ];
     }
 

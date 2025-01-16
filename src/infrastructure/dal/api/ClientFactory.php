@@ -26,9 +26,4 @@ class ClientFactory
                 return self::default();
         }
     }
-
-    public static function forTokenFromType(string $type) : ClientForTokenInterface
-    {
-        return new ClientForToken();
-    }
 }

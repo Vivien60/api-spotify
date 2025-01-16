@@ -4,14 +4,9 @@ declare(strict_types=1);
 namespace view\templates\components;
 
 use Iterator;
-use view\templates\components\Component;
-use contracts\MosaicItem;
 
 class Mosaic extends Component
 {
-    /**
-     * @var Iterator<MosaicItem>|MosaicItem[]
-     */
     public Iterator|array $items;
 
     /**

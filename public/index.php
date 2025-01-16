@@ -23,6 +23,14 @@ session_start();
  *      Il faudra faire en sorte qu'un utilisateur puisse être associé à plusieurs authentifications externes
  */
 
+
+/** @TODO Vivien:
+ *      Inverser ConfigDispatch : il faut pouvoir l'initialiser avec une conf dans le code client, et ce sont les objets qu'on lui passe.
+ *      Car là, on doit le modifier à chaque fois qu'une classe a besoin de config, il est couplé à beaucoup de classes.
+ *      Il vaudrait mieux que ce soit les classes qui l'appellent, je pense,
+ *      en passant par ConfigDispatcher ou un système similaire, qui renvoie la conf initialisée.
+ */
+
 ?>
 <htmL lang="fr">
 <head><title>Benveniidoo !</title></head>

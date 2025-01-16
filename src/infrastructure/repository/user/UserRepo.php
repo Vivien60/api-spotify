@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace infrastructure\repository\user;
 
-use contracts\UserRepoInterface;
 use model\User\User;
+use model\User\UserRepoInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class UserRepo implements UserRepoInterface
@@ -38,10 +38,6 @@ class UserRepo implements UserRepoInterface
         return $items;
     }
 
-    /**
-     * @param array{id: string, url: string, image: string, name: string} $playlist
-     * @return PlaylistItem
-     */
     protected function hydrateItem(array $playlist): User
     {
 

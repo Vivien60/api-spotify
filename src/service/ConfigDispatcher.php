@@ -20,7 +20,6 @@ class ConfigDispatcher
         Spotify::$config = $config;
         PlaylistApiRepo::$config = $config;
         SongApiRepo::$config = $config;
-        GetUserToken::$config = $config;
         GetUserPlaylists::$config = $config;
         User::$config = $config;
         RequestFactory::$config = $config;

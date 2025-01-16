@@ -2,11 +2,11 @@
 declare(strict_types=1);
 namespace service;
 
-use service\contracts\ConfigInterface;
-use contracts\PlaylistRepoInterface;
-use contracts\UserRepoInterface;
 use model\Playlist\Playlist;
+use model\Playlist\PlaylistRepoInterface;
 use model\User\User;
+use model\User\UserRepoInterface;
+use service\contracts\ConfigInterface;
 
 class GetUserPlaylists
 {

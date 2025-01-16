@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace contracts;
+namespace model\Song;
 
 use model\Song\Song as SongItem;
 

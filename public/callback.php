@@ -4,16 +4,13 @@ require_once "../src/autoload.php";
 require_once "../src/utils/trace.php";
 
 use config\Config;
-use exception\RequestAuthError;
 use GuzzleHttp\Exception\RequestException;
 use service\ConfigDispatcher;
-use service\GetUserToken;
 
 session_start();
 ConfigDispatcher::dispatch(Config::getInstance());
-const STATE_OK = 1;
 error_reporting(E_ALL);
-if (!empty($_GET['code']) && !empty($_GET['state']) /*&& $_GET['state'] == STATE_OK*/) {
+if (!empty($_GET['code']) && !empty($_GET['state'])) {
     try {
         $service = new \service\OAuthService();
         $service->createUserToken(

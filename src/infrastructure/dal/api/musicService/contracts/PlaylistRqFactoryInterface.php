@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace infrastructure\dal\api\musicService\contracts;
 
 use infrastructure\dal\api\contracts\internal\EndpointRequestInterface;
-use infrastructure\entity\TokenItem;
 use model\User\User;
 
 interface PlaylistRqFactoryInterface
