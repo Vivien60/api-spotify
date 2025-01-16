@@ -12,6 +12,9 @@ class UrlForCodeAbstract
 
     public array $urlParams = [];
 
+    /**
+     * @throws RandomException
+     */
     public function __construct(private ClientForToken $client, private mixed $clientId, private string $redirectUri)
     {
         $this->buildCodeRequestParams();

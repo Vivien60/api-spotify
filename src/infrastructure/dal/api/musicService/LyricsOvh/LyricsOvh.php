@@ -18,6 +18,9 @@ class LyricsOvh implements SongServiceInterface
     {
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function lyricsFromSongProp(SongItem $song):string
     {
         $request = $this->requestFactory->lyrics($song);
