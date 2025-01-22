@@ -31,8 +31,13 @@ session_start();
  *      en passant par ConfigDispatcher ou un système similaire, qui renvoie la conf initialisée.
  */
 
+/** @TODO Vivien:
+ *      voir pour mettre en place des values objects : immutable objects qui renvoient une nouvelle instance
+ *      en cas de modification (via des méthodes withXXX)
+ */
+
 ?>
-<htmL lang="fr">
+<html lang="fr">
 <head><title>Benveniidoo !</title></head>
 <body>
 <?php
@@ -47,4 +52,4 @@ session_start();
 ?>
 <br/>
 </body>
-</htmL>
+</html>
