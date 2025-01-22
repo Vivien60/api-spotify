@@ -1,25 +1,24 @@
 <?php
+declare(strict_types=1);
 require_once "../src/autoload.php";
 require_once "../vendor/autoload.php";
+require_once "../src/utils/trace.php";
 
-require_once "../config/apiConfig.php";
-
+use config\Config;
 use GuzzleHttp\Exception\RequestException;
-use model\Credentials\BusinessLogic\CredentialsRepo;
-use model\Credentials\Persistence\OneFileAdapter;
-use model\Playlist\BusinessLogic\PlaylistRepo;
-use model\Playlist\Persistense\SpotifyAdapter;
-use view\layouts\ConnectedLayout;
-use view\templates\components\Mosaic;
-use view\templates\Playlists;
-
+use apispotify\service\ConfigDispatcher;
+use apispotify\service\GetUserPlaylists;
+use apispotify\view\layouts\ConnectedLayout;
+use apispotify\view\templates\components\Mosaic;
+use apispotify\view\templates\Playlists;
 session_start();
+ConfigDispatcher::dispatch(Config::getInstance());
+
+$serviceAuth = new apispotify\service\AuthenticatorService();
+$serviceAuth->authenticate();
 try {
-    $tokenRepo = new CredentialsRepo(new OneFileAdapter(TOKEN_STORAGE_FILE));
-    $token = $tokenRepo->ofCurrentUser();
-    $playlistsAtSpotify = new PlaylistRepo(new SpotifyAdapter($token));
-    $tokenRepo->saveIfRefreshed($token);
-    $myPlaylists = $playlistsAtSpotify->getAllMyPlaylists();
+    $getPlaylists = new GetUserPlaylists();
+    $myPlaylists = $getPlaylists->forCurrentUser();
     $view = new Playlists(new ConnectedLayout(), new Mosaic($myPlaylists));
     echo $view->render();
 } catch (RequestException $e) {

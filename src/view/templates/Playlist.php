@@ -1,11 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace view\templates;
+namespace apispotify\view\templates;
 
-use view\layouts\ConnectedLayout;
-use view\layouts\Layout;
-use view\templates\components\Component;
-use view\templates\components\Mosaic;
+use apispotify\view\layouts\Layout;
+use apispotify\view\templates\components\Component;
 
 class Playlist extends Template
 {
@@ -19,7 +18,6 @@ class Playlist extends Template
     }
     public function mainContent(): string
     {
-        $listSongs = $this->typeList;
         return "<div class='container'>Voici la playlist</div>".$this->typeList->render();
     }
 }

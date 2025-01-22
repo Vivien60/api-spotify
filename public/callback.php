@@ -1,39 +1,23 @@
 <?php
+declare(strict_types=1);
 require_once "../src/autoload.php";
+require_once "../src/utils/trace.php";
 
+use config\Config;
 use GuzzleHttp\Exception\RequestException;
-use model\Credentials\BusinessLogic\CredentialsRepo;
-use model\Credentials\Persistence\OneFileAdapter;
-use persistenceclient\api\Spotify\client\ClientForToken as Client;
-use persistenceclient\api\Spotify\request\TokenFromCode;
+use apispotify\service\ConfigDispatcher;
 
 session_start();
-require_once "../src/utils/trace.php";
-require_once "../config/apiConfig.php";
-
-/**
- * @TODO Vivien : gestion de l'affichage de l'erreur
- */
-const STATE_OK = 1;
-$storageFile = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'token.json';
-
-if (!empty($_GET['code']) && !empty($_GET['state']) /*&& $_GET['state'] == STATE_OK*/) {
+ConfigDispatcher::dispatch(Config::getInstance());
+error_reporting(E_ALL);
+if (!empty($_GET['code']) && !empty($_GET['state'])) {
     try {
-        /**
-         * @TODO Vivien :
-         *              Voir pour passer par un adapter, puisque Client fait appel à une infra externe.
-         *              Ici on est dans un process de couplage avec un service externe, donc peut être OAuth.
-         */
-        $client = new Client();
-        $tokenRequest = new TokenFromCode(CLIENT_ID, CLIENT_SECRET, htmlentities($_GET['code']), REDIRECT_URI);
-        $response = $client->sendRequest($tokenRequest);
-        $token = json_decode($response->getBody());
-        if($token?->access_token) {
-            $repo = new CredentialsRepo(new OneFileAdapter($storageFile));
-            $repo->saveNewOne($token);
-        } else {
-            throw new \exception\AuthError("There was an error while sending token request");
-        }
+        $service = new \service\OAuthService();
+        $service->createUserToken(
+            htmlentities($_GET['code']),
+            ['state' => htmlentities($_GET['state'])],
+            Config::getInstance()->playlistService,
+        );
     } catch (RequestException $e) {
         /**
          * @TODO Vivien :

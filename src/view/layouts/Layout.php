@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace view\layouts;
+namespace apispotify\view\layouts;
 
 abstract class Layout
 {
@@ -51,8 +52,6 @@ abstract class Layout
         </footer>
         </body>
         </html>
-        <?php
         HTML;
     }
-
 }

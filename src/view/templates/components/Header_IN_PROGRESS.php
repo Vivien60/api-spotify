@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace view\templates\components;
+namespace apispotify\view\templates\components;
 
-use view\templates\Template;
+use apispotify\view\templates\\Template;
 
 class HeaderINPROGRESS extends Template
 {
@@ -19,7 +20,6 @@ class HeaderINPROGRESS extends Template
 
     public function mainContent(): string
     {
-        // TODO Vivien: Implement mainContent() method.
         return '';
     }
 }

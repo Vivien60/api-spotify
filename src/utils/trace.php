@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 use GuzzleHttp\Exception\RequestException;
 
 define('LOG_FILE', dirname(__FILE__,3)."/log/trace.log");
@@ -10,11 +12,11 @@ define('LOG_FILE', dirname(__FILE__,3)."/log/trace.log");
  */
 function traceRequestException(RequestException|Exception $e, string $message): void
 {
-    trace(print_r($e->getRequest()->getRequestTarget(), 1));
-    trace(print_r($e->getRequest()->getUri(), 1));
-    trace(print_r($e->getRequest()->getMethod(), 1));
-    trace(print_r($e->getRequest()->getHeaders(), 1));
-    trace(print_r($e->getRequest()->getBody(), 1));
+    trace(print_r($e->getRequest()->getRequestTarget(), true));
+    trace(print_r($e->getRequest()->getUri(), true));
+    trace(print_r($e->getRequest()->getMethod(), true));
+    trace(print_r($e->getRequest()->getHeaders(), true));
+    trace(print_r($e->getRequest()->getBody(), true));
 }
 
 /**
@@ -25,7 +27,10 @@ function traceRequestException(RequestException|Exception $e, string $message): 
 function traceException(Throwable|Exception $e, string $message): void
 {
     trace($message);
-    trace($e->getMessage() . ': ' . print_r($e->getTrace(), 1));
+    trace($e->getMessage() . ': ' . print_r($e->getTrace(), true));
+    if($e->getPrevious() instanceof RequestException) {
+        traceRequestException($e->getPrevious(), $e->getPrevious()->getMessage());
+    }
 }
 
 function trace(string|Stringable $message) : void

@@ -1,30 +1,27 @@
 <?php
+declare(strict_types=1);
 require_once "../src/autoload.php";
-require_once "../config/apiConfig.php";
+require_once "../config/Config.php";
 
-use exception\NotFoundE;
-use GuzzleHttp\Exception\RequestException;
-use model\Song\BusinessLogic\SongItem;
-use model\Song\BusinessLogic\SongRepo;
-use model\Song\Persistence\LyricsOvhAdapter;
-use view\layouts\ConnectedLayout;
+use config\Config;
+use apispotify\exception\NotFoundE;
+use apispotify\model\Song\Song;
+use apispotify\service\ConfigDispatcher;
+use apispotify\view\layouts\ConnectedLayout;
 
 session_start();
+ConfigDispatcher::dispatch(Config::getInstance());
 
-
-$song = new SongItem();
-$song->artist = $_GET["artist"];
-$song->title = $_GET["item"];
+$song = new Song();
+$song->artist = htmlentities($_GET["artist"]);
+$song->title = htmlentities($_GET["item"]);
 
 try {
-    /**
-     * @TODO Vivien : voir pour coupler les 2 adaptateurs dans un meta-adaptateur, afin de masquer le fait qu'il y en ait 2
-     */
-    $repo = new SongRepo(new LyricsOvhAdapter(), null);
-    $repo->retrieveLyrics($song);
+    $repo = Config::getInstance()->songRepo;
+    $song = $repo->findBySongInfo($song);
 } catch (NotFoundE $e) {
     $song->lyrics = "No lyrics found for this song.";
 }
 
-$view = new view\templates\Lyrics(new ConnectedLayout(), $song);
+$view = new apispotify\view\templates\Lyrics(new ConnectedLayout(), $song);
 echo $view->render();
