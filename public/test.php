@@ -31,5 +31,3 @@ var_dump($response);
 
 //TEST-a correction 1
 //Test-a correction 2
-
-//TEST B new functionality
